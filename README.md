@@ -4,4 +4,4 @@ My goal with this repository is to save in the cloud and let anyone my work on s
 # Motivation
 Mathematics is my great passion in life. Altough the official education is a good option, today in the 21th century we live in a world where we can get the knowledge for free and in any part of the world. That is what I want to use in my own benefit, in this case, for studying mathematics with online resources and then putting all my thoughs in this.
 
->| - $\zeta$
+> $\zeta$

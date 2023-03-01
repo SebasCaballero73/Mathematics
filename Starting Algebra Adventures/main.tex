@@ -1,0 +1,375 @@
+%========Top Matter=========== (fold)
+\documentclass[final,expand]{problemset}
+% For plot: pfdplots and settings
+\usepackage{pgfplots}
+\pgfplotsset{width=7cm,
+  compat=newest,
+  label style={font=\small},
+  legend style={font=\small}
+}
+%========top_matter=========== (end)
+
+\begin{document}
+\heading[Sebastián Caballero]{Sebastián Caballero}{2023}{Problem set}{Self Study}
+
+\section*{Vector Spaces I}
+
+\problem
+Let $V$ and $W$ be vector spaces over a field $K$. Let $\mathcal{B} = \{v_1, v_2, \dots,
+	v_n\}$ be a basis for $V$ and let $\{w_1, w_2, \dots, w_n\}$ be any
+vectors in
+$W$. There is a unique linear map \begin{align*}
+	\begin{matrix}
+		\phi: & V & \to & W \\
+	\end{matrix}
+\end{align*}
+Such that $\phi(v_i) = w_i$ for all $1 \le i \le n$
+
+\solution{
+	Since $\mathcal{B}$ is a basis for $V$, for any element $v \in V$ there are $a_1, a_2, \dots, a_n \in K$ such that:
+	\begin{align*}
+		v &= a_1v_1 + a_2v_2 + \dots + a_nv_n
+	\end{align*}
+	so if we define $\phi$ such that $\phi(v_i) = w_i$ then for any vector $v$ we would have:
+	\begin{align*}
+		\phi(v) &= a_1\phi(v_1) + a_2\phi(v_2) + \dots + a_n\phi(a_n)\\
+		&= a_1w_1 + a_2w_2 + \dots + a_nw_n
+	\end{align*}
+}
+
+\problem
+Suppose that $V$ is a finite dimensional vector space. Let $\mathcal{B} = \{v_1, v_2, \dots, v_n\}$ be a basis for $V$ then:
+\begin{itemize}
+	\item Any set of $w_1, w_2, \dots, w_n, w_{n+1}$ vectors is linearly dependent
+	\item Any set of $w_1, w_2, \dots, w_{n-1}$ vectors can't generate $V$
+\end{itemize}
+
+\solution{
+	For this, we are going to use the facts needed for a basis.
+	\begin{itemize}
+		\item Let $w_1, w_2, \dots, w_n, w_{n+1}$ be vectors in $V$, we can write them in the next way:
+		\begin{align*}
+			w_1 &= a_{1, 1}v_1 + a_{1, 2}v_2 + \dots + a_{1, n} v_n \\
+			w_2 &= a_{2, 1}v_1 + a_{2, 2}v_2 + \dots + a_{2, n} v_n  \\
+			\dots & \dots \\
+			w_n &= a_{n, 1}v_1 + a_{n, 2}v_2 + \dots + a_{n, n} v_n \\
+			w_{n+1} &= a_{n+1, 1}v_1 + a_{n+1, 2}v_2 + \dots + a_{n+1, n} v_n \\
+		\end{align*}
+		If there is a $w_i$ such that $w_i = 0$ we are done. Suppose then that this is not true, so for each $1 \le i \le n + 1$ exists $j$ such that $a_{i, j} \neq 0$. But since there are $w_{n+1}$ there must be $i_1, i_2$ such that for the same $j$, we have that $a_{i_1, j} \neq 0 \neq a_{i_2, j}$. So, we can express the vector $v_j$ as:
+		\begin{align*}
+			v_j &= \frac{w_{i_1}}{a_{i_1, j}} - \frac{a_{i_1, 1}v_1 + a_{i_1, 2}v_2 + \dots + a_{i_1, n}v_n}{a_{i_1, j}}\\
+			v_j &= \frac{w_{i_2}}{a_{i_2, j}} -\frac{a_{i_2, 1}v_1 + a_{i_2, 2}v_2 + \dots + a_{i_2, n}v_n}{a_{i_2, j}}
+		\end{align*}
+		And so the set is not linearly independent.
+
+		\item Let $w_1, w_2, \dots, w_{n-1}$ be vectors of $V$. Suppose that indeed we can generate $V$ with them, so in particular, we can write:
+		\begin{align*}
+			v_1 &= a_{1, 1}w_1 + a_{1, 2}w_2 + \dots + a_{1, {n-1}} w_{n-1} \\
+			v_2 &= a_{2, 1}w_1 + a_{2, 2}w_2 + \dots + a_{2, {n-1}} w_{n-1}  \\
+			\dots & \dots \\
+			v_n &= a_{n, 1}w_1 + a_{n, 2}w_2 + \dots + a_{n, {n-1}} w_{n-1} \\
+		\end{align*}
+		And since none of them is zero, we can be fure that for each $1 \le i \le n$ exists $j$ such that $a_{i, j} \neq 0$. But since there are $n$ vectors in $\mathcal{B}$ and just $n-1$ vectors $w_i$, there must be $i_1, i_2$ such that for the same $j$, we have that $a_{i_1, j} \neq 0 \neq a_{i_2, j}$. So, we can express the vector $v_j$ as:
+		\begin{align*}
+			w_j &= \frac{v_{i_1}}{a_{i_1, j}} - \frac{a_{i_1, 1}w_1 + a_{i_1, 2}w_2 + \dots + a_{i_1, n}w_n}{a_{i_1, j}}\\
+			w_j &= \frac{v_{i_2}}{a_{i_2, j}} -\frac{a_{i_2, 1}w_1 + a_{i_2, 2}w_2 + \dots + a_{i_2, n}w_n}{a_{i_2, j}}
+		\end{align*}
+		But then this let us generate two different linear combinations within $\mathcal{B}$ that give us the same result, contradicting the linear independency of $\mathcal{B}$.
+	\end{itemize}
+}
+
+\problem Let $V$ be a finite vector space. If $A = \{v_1, v_2, \dots, v_n\}$ generates $V$ then some subset of $A$ is a basis for $V$.
+
+\solution{
+    For that, let declare the next set:
+    \begin{align*}
+        S &= \{W \in \mathcal{P}(A) | W \text{ is linearly independent}\}
+    \end{align*}
+    We can assure that at least there is a maximal element $\{v_1, v_2, \dots, v_m\}$ in $S$ since we can assure the existence of $\{v_1\}$ and at most it can be $A$. Suppose then that it is not $A$, so $m < n$, and we can assure that any set $\{v_1, \dots, v_m, v_i\}$ is linearly dependent, with $m < i \le n$. Therefore we have:
+	\begin{align*}
+		a_1v_1 + \dots + a_nv_n + a_iv_i &= 0
+	\end{align*}
+	has more than the trivial solution, so we can suppose that 
+}
+
+\problem
+Let $A = \{v_1, v_2, \dots, v_n\}$ be a subset of a vector space $V$. Prove that $A$ is linearly independent if and only if the equation $a_1v_1 + a_2v_2 + \dots + a_nv_n = 0$ has the trivial solution.
+
+\solution{
+	We prove a double implication:
+	\begin{itemize}
+		\item[$\Rightarrow)$] If $A$ is linearly independent then by definition the equation $a_1v_1 + a_2v_2 + \dots + a_nv_n = 0$ has only one solution, the trivial one.
+		\item[$\Leftarrow)$] Suppose that $A$ is not linearly independent, so that there are two combinations of scalars $a_1, a_2, \dots, a_n$ and $b_1, b_2, \dots, b_n$ such that for a $v$ in $V$:
+		\begin{align*}
+			a_1v_1 + a_2v_2 + \dots + a_nv_n &= v\\
+			b_1v_1 + b_2v_2 + \dots + b_nv_n &= v
+		\end{align*}
+		And if we use the transitivity we have:
+		\begin{align*}
+			a_1v_1 + a_2v_2 + \dots + a_nv_n &= b_1v_1 + b_2v_2 + \dots + b_nv_n\\
+			(a_1 - b_1)v_1 + (a_2 - b_2)v_2 + \dots + (a_n - b_n)v_n &= 0
+		\end{align*} 
+		But note that $a_1 \neq b_1$, $a_2 \neq b_2$ and so on, so $a_1 - b_1 \neq 0$, $a_2 - b_2 \neq 0$ and so on, so the equation has another solution apart to the trivial one.
+	\end{itemize}
+}
+
+\problem
+Prove the Rank theorem
+
+\solution{
+	Remember that the rank theorem says that if $V$ and $W$ are finite dimensional vector spaces over $K$, and $\phi: V \to W$ is a linear map then:
+	\begin{align*}
+		\dim V &= \dim \ker(\phi) + \dim \phi(V)
+	\end{align*}
+	Let $\mathcal{A} = \{v_1, v_2, \dots, v_n\}$ be a basis for $ker(\phi)$ and let $\mathcal{B} = \{w_1, w_2, \dots, w_m\}$ be a basis for $\phi(V)$. Since $\mathcal{B} \subseteq \phi(V)$ there are $u_1, u_2, \dots, u_m$ such that $\phi(u_1) = w_1, \phi(u_2) = w_2, \dots, \phi(u_m) = w_m$. So, we can create the set:
+	\begin{align*}
+		\mathcal{C} &= \{v_1, v_2, \dots, v_n, u_1, u_2, \dots, u_m\}
+	\end{align*}
+	And we claim that this is a basis for $V$. For that, let's prove the two properties for that:
+	\begin{itemize}
+		\item Suppose that there are scalars $a_1, a_2, \dots, a_n, b_1, \dots, b_m$ such that:
+		\begin{align*}
+			a_1v_1 + a_2v_2 + \dots+  a_nv_n + b_1u_1 + b_2u_2 + \dots + b_mu_m &= 0\\
+			a_1v_1 + a_2v_2 + \dots+ a_nv_n &= -b_1u_1 - b_2u_2 - \dots - b_mu_m\\
+			\phi(a_1v_1) + \phi(a_2v_2) + \dots + \phi(a_nv_n) &= \phi(-b_1u_1) + \phi(-b_2u_2) + \dots + \phi(-b_mu_m)\\
+			a_1\phi(v_1) + a_2\phi(v_2) + \dots + a_n\phi(v_n) &= -b_1\phi(u_1) -b_2\phi(u_2) - \dots - b_n\phi(u_m)\\
+			a_10 + a_20 + \dots + a_n0 &= -b_1w_1 -b_2w_2 - \dots - b_mw_m\\
+			0 &= -b_1w_1 - b_2w_2 - \dots - b_mw_m
+		\end{align*}
+		And since $\mathcal{B}$ is a basis then $b_1 = b_2 = \dots = b_m = 0$. And therefore we have that:
+		\begin{align*}
+			a_1v_1 + a_2v_2 + \dots + a_nv_n + b_1u_2 + b_2u_2 + \dots + b_mu_m &= 0\\
+			a_1v_1 + a_2v_2 + \dots + a_nv_n &= 0
+		\end{align*}
+		And since $\mathcal{A}$ is a basis, then $a_1 = a_2 = \dots = a_n = 0$, and so $\mathcal{C}$ is linearly independent.
+
+		\item Take $v \in V$, we want to prove it is a linear combination of elements of $\mathcal{C}$. So for that, we know that $\phi(v)$ is a linear combination of elements of $\mathcal{B}$:
+		\begin{align*}
+			b_1w_1 + b_2w_2 + \dots + b_mw_m &= \phi(v)\\
+			b_1\phi(u_1) + b_2\phi(u_2) + \dots + b_m\phi(u_m) &= \phi(v)\\
+			\phi(b_1u_1 + b_2u_2 + \dots + b_mu_m) &= \phi(v)\\
+			\phi(b_1u_1 + b_2u_2 + \dots + b_mu_m) - \phi(v) &= 0\\
+			\phi(b_1u_1 + b_2u_2 + \dots + b_mu_m - v) &= 0
+		\end{align*}
+		And since $b_1u_1 + b_2u_2 + \dots + b_mu_m - v \in \ker(\phi)$ we can derive a linear combination of the form:
+		\begin{align*}
+			a_1v_1 + a_2v_2 + \dots + a_nv_n &= b_1u_1 + b_2u_2 + \dots + b_mu_m - v\\
+			a_1v_1 + a_2v_2 + \dots + a_nv_n - b_1u_1 - b_2u_2 - \dots - b_mu_m &= -v\\
+			b_1u_1 + b_2u_2 + \dots + b_mu_m - a_1v_1 - a_2v_2 - \dots - a_nv_n &= v
+		\end{align*}
+
+		And so we have that $v$ is a linear combination of $\mathcal{C}$, so $Span(\mathcal{C}) = V$.
+	\end{itemize}
+
+	And that way we conclude that $\mathcal{C}$ is a basis for $V$ and note that $|\mathcal{C}| = |\mathcal{A}| + |\mathcal{B}|$, so $\dim V = \dim \ker(\phi) + \dim \phi(V)$.
+}
+
+\problem
+Determine whether or not $\{(1, 1, 0), (2, 0, -1), (-3, 1, 1)\}$ is basis for $\mathbb{R}^3$
+
+\solution{
+	First, let's determine whenever it is linearly independent or not.
+	\begin{itemize}
+		\item Suppose that $a_1(1, 1, 0) + a_2(2, 0, -1) + a_3(-3, 1, 1) = 0$. So, if we add those vectors we would have:
+		\begin{align*}
+			a_1(1, 1, 0) + a_2(2, 0, -1) + a_3(-3, 1, 1) &= (a_1, a_1, 0) + (2a_2, 0, -a_2) + (-3a_3, a_3, a_3)\\
+			&= (a_1 + 2a_2 - 3a_3, a_1 + a_3, -a_2 + a_3) = (0, 0, 0)
+		\end{align*}
+		So we would need that:
+		\begin{align*}
+			a_1 + 2a_2 - 3a_3 &= 0\\
+			a_1 + a_3 &= 0\\
+			a_3 - a_2 &= 0
+		\end{align*}
+		If we solve the last two equations for $a_1$ and $a_2$ we would have:
+		\begin{align*}
+			a_1 &= -a_3\\
+			a_2 &= a_3
+		\end{align*}
+		And replacing in the first equation we would have:
+		\begin{align*}
+			a_1 + 2a_2 - 3a_3 &= 0\\
+			-a_3 + 2a_3 - 3a_3 &= 0\\
+			-2a_3 &= 0\\
+			a_3 &= 0
+		\end{align*}
+		And so we conclude that $a_1 = a_2 = a_3 = 0$, so this set is linearly independent.
+
+		\item Take now any vector $(x, y, z) \in \mathbb{R}^3$, we want to prove that we can always find a linear combination of the vectors that give us $(x, y, z)$. For that, suppose that there are such combinations, so:
+		\begin{align*}
+			a_1(1, 1, 0) + a_2(2, 0, -1) + a_3(-3, 1, 1) &= (x, y, z)\\
+			(a_1, a_1, 0) + (2a_2, 0, -a_2) + (-3a_3, a_3, a_3) &= (x, y, z)\\
+			(a_1 + 2a_2 - 3a_3, a_1 + a_3, a_3 - a_2) &= (x, y, z)
+		\end{align*}
+		And so we have:
+		\begin{align*}
+			a_1 + 2a_2 - 3a_3 &= x\\
+			a_1 + a_3 &= y\\
+			a_3 - a_2 &= z
+		\end{align*}
+		Then we have:
+		\begin{align*}
+			a_1 &= y-a_3\\
+			a_2 &= a_3 - z
+		\end{align*}
+		And plugging into the first equation we have:
+		\begin{align*}
+			a_1 + 2a_2 - 3a_3 &= x\\
+			y-a_3 + 2(a_3 - z) - 3a_3 &= x\\
+			y-a_3 + 2a_3 - 2z - 3a_3 &= x\\
+			y - 2z - 2a_3 &= x\\
+			a_3 &= \frac{2z - x- y}{2}
+		\end{align*}
+		And plugging into the next equation:
+		\begin{align*}
+			a_1 &= y - a_3\\
+			a_1 &= y - \frac{x+y-2z}{2}\\
+			a_1 &= y + z - \frac{x}{2} + \frac{y}{2}\\
+			a_1 &= \frac{3}{2} y + z - \frac{x}{2}
+		\end{align*}
+
+		And plugging into the last equation:
+		\begin{align*}
+			a_2 &= a_3 - z\\
+			a_2 &= z - \frac{x}{2} - \frac{y}{2} - z\\
+			a_2 &= \frac{-x-y}{2}
+		\end{align*}
+		And if you try this combination, you would get $(x, y, z)$ so we can see $Span(\{(1, 1, 0), (2, 0, -1), (-3, 1, 1)\}) = \mathbb{R}^3$.
+	\end{itemize}
+
+	And so we have proved that $\{(1, 1, 0), (2, 0, -1), (-3, 1, 1)\}$ is a basis for $\mathbb{R}^3$.
+}
+
+\problem
+Let $\phi: V \to W$ be linear. Suppose that $v_1, \dots, v_n \in V$ are such that $\phi(v_1), \dots, \phi(v_n)$ are linearly independent in $W$. Show that $v_1, \dots, v_n$ are linearly independent.
+
+\solution{
+	For that, since $\phi(v_1), \dots, \phi(v_n)$ are linearly independent, we can assure that the equation:
+	\begin{align*}
+		a_1\phi(v_1) + a_2\phi(v_2) + \dots + a_n\phi(v_n) &= 0
+	\end{align*}
+	has only the trivial solution. Suppose that the equation:
+	\begin{align*}
+		b_1v_1 + b_2v_2 + \dots + b_nv_n &= 0
+	\end{align*}
+	has a solution that is not trivial. That this, we can assure that at least $b_1$ is not $0$. And if we apply to both sides the linear map $\phi$ we get:
+	\begin{align*}
+		\phi(b_1v_1 + b_2v_2 + \dots + b_nv_n) &= \phi(0)\\
+		\phi(b_1v_1) + \phi(b_2v_2) + \dots + \phi(b_nv_n) &= 0\\
+		b_1\phi(v_1) + b_2\phi(v_2) + \dots + b_n\phi(v_n) &= 0
+	\end{align*}
+	But this is a contradiction since this equation can only have the trivial solution. So we can conclude that $v_1, \dots v_n$.
+}
+
+\problem
+If $\{v_1, \dots, v_n\}$ is a basis for $V$ and $\{w_1, \dots, w_m\}$ is a basis for $W$ then:
+\begin{align*}
+	\{(v_1, 0), \dots, (v_n, 0), (0, w_1), \dots, (0, w_n)\}
+\end{align*}
+is a basis for $V \oplus W$
+
+\solution{
+	We need to prove two things:
+	\begin{itemize}
+		\item First, to prove that this set is linearly independent, we need to show that the homogeneous equation has only the trivial solution. So we have:
+		\begin{align*}
+			a_1(v_1, 0) + a_2(v_2, 0) + \dots + a_n(v_n, 0) + b_1(0, w_1) + b_2(0, w_2) + \dots + b_n(0, w_n) &= (0, 0)\\
+			(a_1v_1, 0) + (a_2v_2, 0) + \dots + (a_nv_n, 0) + (0, b_1w_1) + (0, b_2w_2) + \dots + (0, b_nw_n) &= (0, 0)\\
+			(a_1v_1 + a_2v_2 + \dots  +a_nv_n, b_1w_1 + b_2w_2 + \dots + b_nw_n) &= (0, 0)
+		\end{align*}
+		And this means that:
+		\begin{align*}
+			a_1v_1 + a_2v_2 + \dots  +a_nv_n &= 0\\
+			b_1w_1 + b_2w_2 + \dots + b_nw_n &= 0
+		\end{align*}
+		And since those vectors are basis for each vector space $a_1 = a_2 = \dots = a_n = b_1 = b_2 = \dots = b_n$.
+
+		\item For an element $(v, w) \in V \oplus W$, we know that $v$ can be expressed as a linear combination $a_1v_1 + a_2v_2 + \dots + a_nv_n = v$, and also $w$ can be expressed as $b_1w_1 + b_2w_2 + \dots + b_nv_n = w$, so the combination of the vectors in our set will rise:
+		\begin{align*}
+			a_1(v_1, 0) + a_2(v_2, 0) + \dots + a_n(v_n, 0) + b_1(0, w_1) + b_2(0, w_2) + \dots + b_n(0, w_n) = (v, w)
+		\end{align*}
+	\end{itemize}
+}
+
+\problem
+Let $W$ be a subspace of the finite-dimensional vector space $V$. Show that there is a subspace $U$ of $V$ such that $V \cong U \oplus W$.
+
+\solution{
+	For this, define $U$ as follows:
+	\begin{align*}
+		U &:= V \setminus W \cup \{0\}
+	\end{align*}
+	First, we need to prove that this is a subspace of $V$:
+	\begin{quote}
+		Note that for any $v \in U$ different from $0$ and any $c \in K$, if $cv \in W$ then $c^{-1}cv = v \in W$ which contradicts the definition of $U$. If $u, w \in U$ are not both $0$, and if $u + w \in W$ then that means that $u, w \in W$ since $W$ is closed over the operations, which again, contradicts the definition for $U$, so $u + w \in U$. 
+	\end{quote}
+
+	Now, we want to prove that this is an internal sum of $V$, so we have:
+	\begin{itemize}
+		\item If $w \in W$ and $u \in U$ are such that $w + u = 0$, then we would have $w = -u$, which means that $w \in U$ and also that $u = -w \in V$, which means that since its only common element is $0$, $u = w = 0$.
+		\item For any element $v \in V$, there are two alternatives. If $v \in W$ then we can express $v$ as $v + 0$ and $0 \in U$. If $v \not\in W$ then $v \in U$ by definition and so $v = 0 + v$ with $0 \in W$. 
+	\end{itemize}	
+
+	And so we conclude that $U \oplus W$ is an internal sum of $V$.
+}
+
+\problem A linear map $\rho: V \to V$ is idempotent if $\rho\rho = \rho$. Show that $\rho$ acts as an identity over $\rho(V)$ if $\rho$ is idempotent.
+
+\solution{
+	For that, we want to prove that $\rho^2 = Id_{\rho(V)}$. For that, let $v \in \rho(V)$, we know that there is $w \in V$ such that $\rho(w) = v$. Now, if we apply again the function we would have:
+	\begin{align*}
+		\rho(\rho(w)) &= \rho(v)\\
+		\rho(w) &= \rho(v)\\
+		v &= \rho(v)
+	\end{align*}
+	So we conclude that $\rho^2 = Id_{\rho(V)}$.
+}
+
+
+\problem Decide if $\phi: \mathbb{R}^2 \to \mathbb{R}^2$ given by $\phi(x, y) = (x+y, 2x-y)$ is an isomorphism. If it is, find a formula for $\phi^{-1}(x, y)$ and prove they are inverses.
+
+\solution{
+	Suppose that for a vector $(a, b) \in \mathbb{R}^2$, exists $(x, y) \in \mathbb{R}^2$ whose image under $\phi$ is $(a, b)$. We would have:
+	\begin{align*}
+		\phi(x, y) &= (x+y, 2x-y) = (a, b)
+	\end{align*}
+	And so we can write the next equations:
+	\begin{align*}
+		x + y &= a\\
+		2x-y &= b
+	\end{align*}
+	If we solve for $x$ in the first equation we would have:
+	\begin{align*}
+		x &= a - y
+	\end{align*}
+	And replacing in the second equation we would have:
+	\begin{align*}
+		2x-y = 2(a-y) - y &= b\\
+		2a-2y-y &= b\\
+		2a-3y &= b\\
+		-3y &= b - 2a\\
+		y &= \frac{2a-b}{3}
+	\end{align*}
+	And so if we plug in into the second equation we would have:
+	\begin{align*}
+		x &= a - y\\
+		&= a - \frac{2a-b}{3}\\
+		&= a - \frac{2a}{3} - \frac{b}{3}\\
+		&= \frac{a}{3} - \frac{b}{3}\\
+		&= \frac{a-b}{3}
+	\end{align*}
+	And so we would have:
+	\begin{align*}
+		\phi^{-1}(x, y) &= \left(\frac{x-y}{3}, \frac{2x-y}{3}\right)
+	\end{align*}
+	We can prove also that this indeed the inverse isomorphism by composing them:
+	\begin{itemize}
+		\item First, if we compose $\phi$ and $\phi^{-1}$ we would have:
+		\begin{align*}
+			\phi(\phi^{-1}(x, y)) &= \phi\left(\frac{x-y}{3}, \frac{2x-y}{3}\right)\\
+			&= \left(\frac{x-y}{3} + \frac{2x-y}{3}, 2 \cdot \frac{x-y}{3} - \frac{2x-y}{3}\right)\\
+			&= \left(\frac{3x}{3}, \frac{2x-2y}{3} + \frac{y-2x}{3}\right)
+		\end{align*}
+	\end{itemize}
+}
+\end{document}

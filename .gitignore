@@ -12,6 +12,7 @@
 *.cb2
 .*.lb
 .vscode
+.obsidian
 
 ## Intermediate documents:
 *.dvi
