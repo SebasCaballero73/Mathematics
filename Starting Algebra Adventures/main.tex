@@ -354,22 +354,106 @@ Let $W$ be a subspace of the finite-dimensional vector space $V$. Show that ther
 	\begin{align*}
 		x &= a - y\\
 		&= a - \frac{2a-b}{3}\\
-		&= a - \frac{2a}{3} - \frac{b}{3}\\
-		&= \frac{a}{3} - \frac{b}{3}\\
-		&= \frac{a-b}{3}
+		&= a - \frac{2a}{3} + \frac{b}{3}\\
+		&= \frac{a}{3} + \frac{b}{3}\\
+		&= \frac{a+b}{3}
 	\end{align*}
 	And so we would have:
 	\begin{align*}
-		\phi^{-1}(x, y) &= \left(\frac{x-y}{3}, \frac{2x-y}{3}\right)
+		\phi^{-1}(x, y) &= \left(\frac{x+y}{3}, \frac{2x-y}{3}\right)
 	\end{align*}
 	We can prove also that this indeed the inverse isomorphism by composing them:
 	\begin{itemize}
 		\item First, if we compose $\phi$ and $\phi^{-1}$ we would have:
 		\begin{align*}
-			\phi(\phi^{-1}(x, y)) &= \phi\left(\frac{x-y}{3}, \frac{2x-y}{3}\right)\\
-			&= \left(\frac{x-y}{3} + \frac{2x-y}{3}, 2 \cdot \frac{x-y}{3} - \frac{2x-y}{3}\right)\\
-			&= \left(\frac{3x}{3}, \frac{2x-2y}{3} + \frac{y-2x}{3}\right)
+			\phi(\phi^{-1}(x, y)) &= \phi\left(\frac{x+y}{3}, \frac{2x-y}{3}\right)\\
+			&= \left(\frac{x+y}{3} + \frac{2x-y}{3}, 2 \cdot \frac{x+y}{3} - \frac{2x-y}{3}\right)\\
+			&= \left(\frac{3x}{3}, \frac{2x+2y}{3} + \frac{y-2x}{3}\right)\\
+			&= \left(x, \frac{3y}{3}\right)\\
+			&= (x, y)
+		\end{align*}
+		\item And now, if we compose $\phi^{-1}$ and $\phi$ we get:
+		\begin{align*}
+			\phi^{-1}(\phi(x, y)) &= \phi^{-1}\left(x+y, 2x-y\right)\\
+			&= \left(\frac{x+y + 2x-y}{3}, \frac{2(x+y) - (2x-y)}{3}\right)\\
+			&= \left(\frac{3x}{3}, \frac{2x+2y-2x+y}{3}\right)\\
+			&= \left(x, \frac{3y}{3}\right)\\
+			&= (x, y)
 		\end{align*}
 	\end{itemize}
+
+	So we conclude that $\phi$ and $\phi^{-1}$ are inverses and so they are isomorphisms.
+}
+
+% TO DO
+\problem Let $V$ be a vector space over a field $k$ and let $U, W$ be finite dimensional subspaces of $V$. Prove that both $U + W$ and $U \cap W$ are finite-dimensional subspaces of $V$ and that $$\dim(U + W) + \dim(U \cap W) = \dim U + \dim W$$
+
+\solution{
+	First, note that if $U \cap W$ is the empty set, then its dimension is $0$ and so it is finite-dimensional. Suppose it is not empty, so there is at least one $v \in U \cap W$. If we suppose that $\mathcal{B}$ is an infinite basis for $U \cap W$ then $v$ is a linear combination of the elements in $\mathcal{B}$. But also $v \in U$ but this would be a contradiction because this implies that $\mathcal{B}$ is linearly dependent and so it cannot be a basis for $U \cap W$.\\
+
+	Now, we can find basis for each vector spaces as follows:
+	\begin{align*}
+		\mathcal{B} &= \{v_1, \dots, v_k\} (\text{Basis for $U \cap W$})\\
+		\mathcal{B}_1 &= \{v_1, \dots, v_k, u_1, \dots, u_n\} (\text{Basis for $U$, since we can extend any basis})\\
+		\mathcal{B}_2 &= \{v_1, \dots, v_k, w_1, \dots, w_m\} (\text{Basis for $W$,  since we can extend any basis})
+	\end{align*}
+	We are going to prove that $\mathcal{A} = \{v_1, \dots, v_k, u_1, \dots, u_n, w_1, \dots, w_m\}$ is a basis for $U + W$. 
+	\begin{itemize}
+		\item First, suppose that $a_1, \dots, a_k, b_1, \dots b_n, c_1, \dots, c_m$ are scalars in $k$ such that:
+		\begin{align*}
+			a_1v_1 + \dots + a_kv_k + b_1u_1 + \dots + b_nu_n + c_1w_1 + \dots + c_mw_m &= 0\\
+		\end{align*}
+		Suppose with no lose of generality that $a_1 \neq 0$, so we can express $v_1$ in the next way:
+		\begin{align*}
+			v_1 &= \frac{-a_2v_2 - \dots - a_kv_k - b_1u_1 - \dots - b_nu_n - c_1w_1 - \dots - c_mw_m}{a_1}
+		\end{align*}
+		But note that $v_1 \in U$ and $v_1 \in W$, so we can assure that
+
+		\item For any element $v \in U + W$, we can express it as $u + w$ with $u \in U$ and $w \in W$. Now, for that we can express $u$ and $w$ as:
+		\begin{align*}
+			u &= a_1v_1 + a_2v_2 + \dots + a_kv_k + x_1u_1 + x_2u_2 + \dots + x_nu_n\\
+			w &= b_1v_1 + b_2v_2 + \dots + b_kv_k + y_1w_1 + y_2w_2 + \dots + y_mw_m
+		\end{align*}
+		And if we add them up we get:
+		\begin{align*}
+			u + w &= a_1v_1 + a_2v_2 + \dots + a_kv_k + x_1u_1 + x_2u_2 + \dots + x_nu_n + b_1v_1 + b_2v_2 + \dots + b_kv_k + y_1w_1 + y_2w_2 + \dots + y_mw_m\\
+			v &= (a_1+b_1)v_1 + (a_2 + b_2)v_2 + \dots + (a_k + b_k)v_k + x_1u_1 + x_2u_2 + \dots + x_nu_n  + y_1w_1 + y_2w_2 + \dots + y_mw_m
+		\end{align*}
+		And so we have proved that $Span(\mathcal{A}) = U + W$.
+	\end{itemize}
+
+	Therefore, we conclude that $\mathcal{A}$ is a basis for $U + W$. But since the basis for $U$ and the basis for $W$ includes both the basis for $U \cap W$, we need to extract it, so:
+	\begin{align*}
+		\dim (U + W) &= \dim U + \dim W - \dim(U \cap W)\\
+		\dim (U + W) + \dim(U \cap W) &= \dim U + \dim W
+	\end{align*}
+}
+
+\problem Let $\phi \in End(V)$ for a finite dimensional vector space $V$. Prove that $\phi$ is monic if and only if it is epic if and only if it is an isomorphism
+
+\solution{
+	Since $V$ is a finite dimensional vector space we can use the rank theorem to find the dimensions of the kernel, images and $V$.
+	\begin{itemize}
+		\item Suppose that $\phi$ is monic, so that $\ker (\phi) = \{0\}$. We would have then that $\dim \ker(\phi) = 0$ and so $\dim V = \dim \phi(V)$, and since $\phi(V) \subseteq V$ we conclude that $\phi(V) = V$ so that $\phi$ is epic.
+		\item Suppose that $\phi$ is epic, so that $\phi(V) = V$. We would have then that $\dim\ker(\phi) = 0$, and since $\ker(\phi)$ is a subspace of $V$, if there would be a vector different from $0$ into the set, it would make a basis and so $\dim\ker(\phi) > 0$, so we would only have that $\ker(\phi) = \{0\}$ and so $\phi$ is monic.
+		\item If we suppose that $\phi$ is monic or epic, we get the other one and so it is an isomorphism. If it is an isomorphism we are granted that it is monic and epic. 
+	\end{itemize}
+}
+
+\problem If $\phi: \mathbb{R}^2 \to \mathbb{R}^2$ is defined as $\phi(x, y) = (x+y, 2x-y)$ then determine what is $p(\phi)$ when $p(x) = x^2 - 2x + 1$
+
+\solution{
+	Note that $\phi^2 = \phi \circ \phi$ and so $\phi^0 = Id_{\mathbb{R}^2}$, and we can write the polynomial as:
+	\begin{align*}
+		p(x) &= x^2 - 2x + 1x^0
+	\end{align*}
+	So if we apply it to $\phi$ we would have:
+	\begin{align*}
+		p(\phi(x, y)) &= \phi^2(x, y) - 2\phi(x, y) + 1\phi^0(x, y)\\
+		&= \phi(x+y, 2x-y) - 2(x+y, 2x-y) + 1(x, y)\\
+		&= (3x, 3y) + (-2x-2y, 2y-4x) + (x, y)\\
+		&= (3x - 2x - 2y + x, 3y + 2y - 4x + y)\\
+		&= (2x-2y, 6y-4x)
+	\end{align*}
 }
 \end{document}
