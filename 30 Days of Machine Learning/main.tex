@@ -12,7 +12,7 @@
 \begin{document}
 \heading[Caballero]{Sebastián Caballero}{2023}{Problem set}{30 Days of ML}
 
-\section{Systems of linear equations, Matrices, and vector spaces}
+\section{Systems of linear equations, Matrices, and vector spaces, rank of matrices, Linear maps, and affine spaces}
 \problem We consider $(\mathbb{R} \setminus \{-1\}, \star)$ where:
 \begin{align*}
 	a \star b &= a + ab + b
@@ -334,6 +334,7 @@ and $x_1 + x_2 + x_3 = 1$.
 }
 
 \problem Which of the following sets are subsets of $\mathbb{R}^3$?
+
 \solution{
 	\begin{enumerate}
 		\item $A = \{(\lambda, \lambda + \mu^3, \lambda-\mu^3) | \lambda, \mu \in \mathbb{R}\}$. Take two elements in $A$ and a scalar $c \in \mathbb{R}$, then:
@@ -429,5 +430,195 @@ and $x_1 + x_2 + x_3 = 1$.
 			1\\-2\\5
 		\end{bmatrix}
 	\end{align*}
+}
+
+\problem
+Consider the linear mapping defined by:
+\begin{align*}
+	\begin{matrix}
+		\phi: & \mathbb{R}^3 & \to & \mathbb{R}^4\\
+		& (x_1, x_2, x_3) & \mapsto & (3x_1+2x_2+x_3, x_1+x_2+x_3, x_1-3x_2, 2x_1 + 3x_2 + x_3)
+	\end{matrix}
+\end{align*}
+Find the matrix associated with the linear transformation, determine the rank of the matrix and compute the image, the kernel and their dimension.
+
+\solution{
+	First, we apply the transformation to the canonical basis in $\mathbb{R}^3$ as:
+	\begin{align*}
+		\phi(1, 0, 0) &= (3, 1, 1, 2)\\
+		\phi(0, 1, 0) &= (2, 1, -3, 3)\\
+		\phi(0, 0, 1) &= (1, 1, 0, 1)\\
+	\end{align*}
+	And so we end up with the matrix:
+	\begin{align*}
+		A &= \begin{bmatrix}
+			3 & 2 & 1\\ 1 & 1 &1 \\ 1 & -3 & 0\\ 2 & 3 & 1
+		\end{bmatrix}
+	\end{align*}
+	Now, if we reduce it to the echelon form:
+	\begin{align*}
+		\begin{bmatrix}
+			3 & 2 & 1 & \vline& a\\ 1 & 1 &1 & \vline& b\\ 1 & -3 & 0 &\vline& c\\ 2 & 3 & 1 &\vline& d
+		\end{bmatrix} &\longrightarrow \begin{bmatrix}
+			1 & 1 & 1 &\vline& b\\ 3 & 2 &1 &\vline& a\\ 1 & -3 & 0 &\vline& c\\ 2 & 3 & 1 &\vline& d
+		\end{bmatrix}\begin{matrix}
+			R_2 \\ R_1 \\ \\ \\
+		\end{matrix}\\
+		&\longrightarrow
+			\begin{bmatrix}
+				1 & 1 & 1 &\vline& b\\ 0 & -1 & -2 &\vline& a-3b\\ 0 & -4 &-1 &\vline& c - b\\ 0 & 1 & -1 &\vline& d - 2b
+			\end{bmatrix}\begin{matrix}
+				 \\ -3R_1 \\ -R_1\\ -2R_1\\
+			\end{matrix}\\
+			&\longrightarrow
+			\begin{bmatrix}
+				1 & 1 & 1 &\vline& b\\ 0 & 1 & 2 &\vline& 3b - a\\ 0 & 4 &1 &\vline& b - c\\ 0 & -1 & 1 &\vline& 2b - d
+			\end{bmatrix}\begin{matrix}
+				 \\ -R_2 \\ -R_3\\ -R_4\\
+			\end{matrix}\\
+			&\longrightarrow
+			\begin{bmatrix}
+				1 & 1 & 1 &\vline& b \\ 0 & 1 & 2 &\vline& 3b - a\\ 0 & 0 & -3 &\vline& -3b-c\\ 0 & 0 & -2 &\vline& 3b - d
+			\end{bmatrix}\begin{matrix}
+				 \\  \\ -4R_1\\ +R_1\\
+			\end{matrix}\\
+			&\longrightarrow
+			\begin{bmatrix}
+				1 & 1 & 1  &\vline& b\\ 0 & 1 & 2 &\vline& 3b-a\\ 0 & 0 & 1 &\vline& b + \frac{c}{3}\\ 0 & 0 & -1 &\vline& d - 3b
+			\end{bmatrix}\begin{matrix}
+				 \\  \\ -\frac{1}{3}R_3\\ -R_4\\
+			\end{matrix}\\
+			&\longrightarrow
+			\begin{bmatrix}
+				1 & 1 & 1 &\vline& b\\ 0 & 1 & 2&\vline& 3b-a \\ 0 & 0 & 1 &\vline& b + \frac{c}{3}\\ 0 & 0 & 0 &\vline& d + \frac{c}{3} - 2b
+			\end{bmatrix}\begin{matrix}
+				 \\  \\ \\ +R_3\\
+			\end{matrix}\\
+			&\longrightarrow
+			\begin{bmatrix}
+				1 & 1 & 0 &\vline& -\frac{c}{3}\\ 0 & 1 & 0&\vline& b - a - \frac{2c}{3} \\ 0 & 0 & 1 &\vline& b + \frac{c}{3}\\ 0 & 0 & 0 &\vline& d + \frac{c}{3} - 2b
+			\end{bmatrix}\begin{matrix}
+				 -R_3\\ -2R_3  \\ \\\\
+			\end{matrix}\\
+			&\longrightarrow
+			\begin{bmatrix}
+				1 & 0 & 0 &\vline& a - b + \frac{c}{3}\\ 0 & 1 & 0&\vline& b - a - \frac{2c}{3} \\ 0 & 0 & 1 &\vline& b + \frac{c}{3}\\ 0 & 0 & 0 &\vline& d + \frac{c}{3} - 2b
+			\end{bmatrix}\begin{matrix}
+				 -R_2\\   \\ \\\\
+			\end{matrix}\\
+	\end{align*}
+
+	So the image is the set:
+	\begin{align*}
+		Im(\phi) = \{(a, b, c, d) \in \mathbb{R}^4| d + \frac{c}{3} - 2b = 0 \}
+	\end{align*}
+	Note that when $(a, b, c, d) = (0, 0, 0, 0)$ then the system only has the trivial solution and so we conclude that the rank of $A$ is $3$ and that the kernel is just $\{0\}$. By the rank theorem, we have:
+	\begin{align*}
+		\dim V &= \dim(\ker(\phi)) + \dim(\phi(V))\\
+		\dim \mathbb{R}^3 &= \dim(\{0\}) + \dim(\phi(V))\\
+		3 &= 0 + \dim(\phi(V))\\
+		\dim(\phi(V)) &= 3
+	\end{align*}
+	And so we conclude that even when the linear transformation is monic, it is not epic.
+}
+
+\problem Let $V$ be a vector space. Let $f$ and $g$ two automorphism over $E$ such that $f \circ g = Id_E$. Show that $\ker(f) = \ker(g \circ f)$, $Im(g) = Im(g \circ f)$ and that $\ker(f) \cap Im(g) = \{0_E\}$.
+
+\solution{
+	First, we want to show that $\ker(g \circ f) = \{0_E\}$ since $f$ is an automorphism. So, suppose that $v \in E$ is such that $(g \circ f)(v) = g(f(v)) = 0$. Since $g$ is an automorphism, we conclude that $f(v) = 0$ and since $f$ is also an automorphism, we conclude that $v = 0$. So, $\ker(f) = \ker(g \circ f)$.\\
+
+	Also, we want to show $Im(g \circ f) = E$, so take $v \in E$, since $g$ is an automorphism we can find $u \in E$ such that $g(u) = v$. And also, since $f$ is an automorphism, we can find $w \in E$ such that $f(w) = u$, so we have that:
+	\begin{align*}
+		(g \circ f)(w) &= g(f(w))\\
+		&= g(u)\\
+		&= v
+	\end{align*}
+	And so we conclude that $Im(g) = Im(g \circ f)$. Note that also $0 \in Im(g)$ but the only element in $\ker(f)$ is $0$, so we must have that $\ker(f) \cap Im(g) = \{0_E\}$.
+}
+
+\problem Let $F = \{(x, y, z) \in \mathbb{R}^3 | x + y - z = 0\}$ and $G =\{(a- b, a+b, a-3b) \in \mathbb{R}^3 | a, b \in \mathbb{R}\}$. Prove that they are subspaces of $\mathbb{R}^3$, calculate $F \cap G$ and then using basis for $F$ and $G$ check the result.
+
+\solution{
+	First, we are going that both sets are subspaces of $\mathbb{R}^3$:
+	\begin{itemize}
+		\item Let $(x, y, z), (a, b, c) \in F$ and let $r \in \mathbb{R}$, we want to show that their linear combination is in $F$:
+		\begin{align*}
+			r(x, y, z) + (a, b, c) &= (rx, ry, rz) + (a, b, c)\\
+			&= (rx + a, ry+b, rz+c) 
+		\end{align*}
+		And by definition, we have the equations:
+		\begin{align*}
+			x + y - z &= 0\\
+			a + b - c &= 0\\
+		\end{align*}
+		If we multiply the first by $r$ we get:
+		\begin{align*}
+			rx + ry - rz &= 0\\
+			a + b - c &= 0\\
+		\end{align*}
+		and if we add them up:
+		\begin{align*}
+			(rx + a) + (ry + b) - (rz + c) &= 0
+		\end{align*}
+		Which proves that $(rx + a, ry+b, rz+c) \in F$ and so it is a subspace.
+
+		\item Let $(a - b, a+b, a-3b), (x - y, x+y, x-3y)$ and $r \in \mathbb{R}$ we want to show that their linear combination is in $G$:
+		\begin{align*}
+			r(a-b, a+b, a-3b) + (x-y, x+y, x-3y) &= (ar-br, ar+br, ar-3br) + (x-y, x+y, x-3y)\\
+			&= ((ar + x) - (br + y), (ar + x) + (br + y), (ar + x) - 3(br + y))
+		\end{align*}
+		and since $ar+x, br+y \in \mathbb{R}$, by definition $((ar + x) - (br + y), (ar + x) + (br + y), (ar + x) - 3(br + y))$ and so $G$ is a subspace.
+	\end{itemize}
+
+	Now, if we calculate $F \cap G$, we take a vector $(x, y, z) \in F \cap G$ then it is necessary that $x + y - z = 0$ and for $a, b \in \mathbb{R}$ we got $x = a - b$, $y = a + b$ and $z = a - 3b$. If we replace it into the another equation we get:
+	\begin{align*}
+		x + y - z &= 0\\
+		a - b + a + b - a + 3b &= 0\\
+		a + 3b &= 0\\
+		b &= -\frac{a}{3}
+	\end{align*}
+
+	and so we get:
+	\begin{align*}
+		x &= \frac{4a}{3}\\
+		y &= \frac{2a}{3}\\
+		z &= 2a
+	\end{align*}
+
+	so we got vectors of the form $\left(\frac{4a}{3}, \frac{2a}{3}, 2a\right)$ such that $a \in \mathbb{R}$. Now, we are going to find a basis for $F$ and for $G$.
+
+	\begin{itemize}
+		\item For $F$, note that each vector is of the form $(x, y, z)$ with $x + y - z = 0$ and so $z = x + y$, so we can express it:
+		\begin{align*}
+			(x, y, z) &= (x, y, x+y)\\
+			&= (x, 0, x) + (0, y, y)\\
+			&= x(1, 0, 1) + y(0, 1, 1)
+		\end{align*}
+		And so a basis for $F$ is $\{(1, 0, 1), (0, 1, 1)\}$.
+
+		\item For $G$, we have vectors of the form $(a-b, a+b, a-3b)$ so we can descompose it like:
+		\begin{align*}
+			(a-b, a+b, a-3b) &= (a, a, a) + (-b, b, -3b)\\
+			&= a(1, 1, 1) + b(-1, 1, -3)
+		\end{align*}
+		And so a basis for $G$ is $\{(1, 1, 1), (-1, 1, -3)\}$.
+	\end{itemize}
+
+	And now we express a vector of $F \cap G$ as a linear combination with scalars $x, y, a, b \in \mathbb{R}$ as:
+	\begin{align*}
+		x(1, 0, 1) + y(0, 1, 1) &= a(1, 1, 1) + b(-1, 1, -3)\\
+		(x, 0, x) + (0, y, y) &= (a, a, a) + (-b, b, -3b)\\
+		(x, y, x+y) &= (a-b, a+b, a-3b)
+	\end{align*}
+	and so we get $x = a - b$, $y = a + b$ and $x + y = a - 3b$, but we can replace in this last equation as:
+	\begin{align*}
+		x + y &= a - 3b\\
+		a - b + a + b &= a - 3b\\
+		2a &= a - 3b\\
+		a &= -3b\\
+		b &= -\frac{a}{3}
+	\end{align*}
+
+	and so we get the same result as we did without the basis.
 }
 \end{document}
