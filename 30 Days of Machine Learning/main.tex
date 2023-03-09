@@ -621,4 +621,234 @@ Find the matrix associated with the linear transformation, determine the rank of
 
 	and so we get the same result as we did without the basis.
 }
+
+\section{Analytic Geometry}
+
+\problem Show that $\langle \cdot, \cdot \rangle$ defined for all $x = (x_1, x_2) \in \mathbb{R}^2$ and $y = (y_1, y_2) \in \mathbb{R}^2$ by: $$\langle x, y\rangle = x_1y_1 - (x_1y_2 + x_2y_1) + 2(x_2y_2)$$ is an inner product.
+
+\solution{
+	We need to prove three things. That $\langle \cdot, \cdot \rangle$ is a bilinear map, that it is symmetric and that is positive definite. 
+	\begin{itemize}
+		\item First, to prove that it is a bilinear transformation, take $(x_1, x_2), (y_1, y_2), (z_1, z_2) \in \mathbb{R}^2$ and $a, b \in \mathbb{R}$. Then:
+		\begin{align*}
+			\langle (x_1, x_2), (ay_1 + bz_1, ay_2 + bz_2) \rangle &= x_1(ay_1 + bz_1) - (x_1 \cdot (ay_2 + bz_2) + x_2(ay_1 + bz_1)) + 2x_2(ay_2 + bz_2)\\
+			&= ax_1y_1 + bx_1z_1 - (ax_1y_2 + bx_1z_2 + ax_2y_1 + bx_2z_1) + 2ax_2y_2 + 2bx_2z_2\\
+			&= ax_1y_1 - ax_1y_2 - ax_2y_1 + 2a(x_2y_2) + bx_1z_1 - bx_1z_2 - bx_2z_1 + 2b(x_2z_2)\\
+			&= a(x_1y_1 - (x_1y_2 + x_2y_1) + 2(x_2y_2)) + b(x_1z_1 - (x_1z_2 + x_2z_1) + 2(x_2z_2))\\
+			&= a\langle (x_1, x_2), (y_1, y_2)\rangle + b\langle (x_1, x_2), (z_1, z_2)\rangle
+		\end{align*}
+
+		In a similar way we prove that $\langle (ax_1 + by_1, ax_2 + by_2), (z_1, z_2) \rangle = a\langle (x_1, x_2), (z_1, z_2)\rangle + b\langle (y_1, y_2), (z_1, z_2) \rangle$, so we conclude that it is a bilinear transformation.
+
+		\item We want to show that this transformation is symmetric. So:
+		\begin{align*}
+			\langle x, y \rangle &= x_1y_1 - (x_1y_2 + x_2y_1) + 2(x_2y_2)\\
+			&= y_1x_1 - (y_1x_2 + y_2x_1) + 2(y_2x_2)\\
+			&= \langle y, x\rangle
+		\end{align*}
+
+		\item And for the last part, we want to show that it is positive define. That is, suppose that $(x_1, x_2) \neq (0, 0)$ so we want to show that its inner product is positive:
+		\begin{align*}
+			\langle (x_1, x_2), (x_1, x_2) \rangle &= x_1\cdot x_1 - (x_1x_2 + x_1x_2) + 2(x_2 \cdot x_2)\\
+			&= x_1^2 - 2x_1x_2 + 2x_2^2\\
+			&= x_1^2 - 2x_1x_2 + x_2^2 + x_2^2\\
+			&= (x_1 - x_2)^2 + x_2^2
+		\end{align*}
+		And no matter the chooses of $x_1, x_2$ we always end up with a positive sum of squares, so $\langle x, x\rangle > 0$ and it is easy to see that $\langle 0, 0\rangle = 0$.
+	\end{itemize}
+}
+
+\problem Consider $\mathbb{R}^2$ with $\langle \cdot, \cdot \rangle$ defined for all $x$ and $y$ in $\mathbb{R}^2$ as:
+\begin{align*}
+	\langle x, y \rangle &:= x^\top \begin{bmatrix}
+		2 & 0\\ 1 & 2
+	\end{bmatrix}y
+\end{align*}
+Is it an inner product?
+
+\solution{
+	First, we could rearrange the expression taking $x = (x_1, x_2)$ and $y = (y_1, y_2)$ as:
+	\begin{align*}
+		\langle x, y \rangle &= \begin{bmatrix}
+			x_1 & x_2
+		\end{bmatrix} \begin{bmatrix}
+			2 & 0\\ 1 & 2
+		\end{bmatrix} \begin{bmatrix}
+			y_1 \\ y_2
+		\end{bmatrix}\\
+		&= \begin{bmatrix}
+			x_1 & x_2
+		\end{bmatrix} \begin{bmatrix}
+			2y_1 \\ y_1 + 2y_2
+		\end{bmatrix}\\
+		&= 2x_1y_1 + x_2y_1 + 2x_2y_2
+	\end{align*}
+	And now we must to test the three conditions:
+	\begin{itemize}
+		\item First, we want to prove that it is a bilinear transformation:
+		\begin{align*}
+			\langle (x_1, x_2), (ay_1 + bz_1, ay_2 + bz_2)\rangle &= 2x_1(ay_1 + bz_1) + x_2(ay_1+bz_1) + 2x_2(ay_2 + bz_2)\\
+			&= 2ax_1y_1 + 2bx_1z_1 + ax_2y_1 + bx_2z_1 + 2ax_2y_2 + 2bx_2z_2\\
+			&= 2ax_1y_1 + ax_2y_1 + 2ax_2y_2 + 2bx_1z_1 + bx_2z_1 + 2bx_2z_2\\
+			&= a(2x_1y_1 + x_2y_1 + 2x_2y_2) + b(x_1z_1 + x_2z_1 + x_2z_2)\\
+			&= a\langle (x_1, x_2), (y_1, y_2)\rangle + b\langle (x_1, x_2), (z_1, z_2)\rangle
+		\end{align*}
+		And we can prove in a similar way that $\langle (ax_1 + by_1, ax_2 + by_2), (z_1, z_2) \rangle = a\langle (x_1, x_2), (y_1, y_2)\rangle + b\langle (x_1, x_2), (z_1, z_2)\rangle$. So we conclude that $\langle \cdot, \cdot \rangle$ is a bilinear transformation.
+
+		\item Now, we need to show that it is symmetric:
+		\begin{align*}
+			\langle x, y \rangle &= 2x_1y_1 + x_2y_1 + 2x_2y_2\\
+			&= 2x_2y_2 + y_1x_2 + 2x_1y_1
+		\end{align*}
+
+		But this does not implies that $y_1x_2 = y_2x_1$ so it is not symmetric and therefore it is not an inner product.
+	\end{itemize}
+}
+
+\problem Compute the distance between $x = (1, 2, 3)$ and $y = (-1, -1, 0)$ using:
+\begin{enumerate}
+	\item $\langle x, y \rangle := x^\top y$
+	\item $\langle x, y \rangle := x^\top y A$ with $A := \begin{bmatrix}
+		2 & 1 & 0\\ 1 & 3 & -1\\ 0 & -1 & 2
+	\end{bmatrix}$
+\end{enumerate}
+
+\solution{
+	Remmber that the distance induced by a product is the norm induced by that inner product. We can first calculate $x-y$ as:
+	\begin{align*}
+		x - y &= (1, 2, 3) - (-1, -1, 0)\\
+		&= (2, 3, 3)
+	\end{align*}
+	And so we do the norm of that vector under each of the inner products defined:
+	\begin{enumerate}
+		\item For $\langle x, y \rangle := x^\top y$, we have:
+		\begin{align*}
+			d(x, y) &= \|x-y\|\\
+			&= \sqrt{\langle x-y, x-y\rangle}\\
+			&= \sqrt{\langle (2, 3, 3), (2, 3, 3) \rangle}\\
+			&= \sqrt{2^2 + 3^2 + 3^2}\\
+			&= \sqrt{4 + 9 +9}\\
+			&= \sqrt{22}
+		\end{align*}
+
+		\item For $\langle x, y \rangle := x^\top y A$ with $A := \begin{bmatrix}
+			2 & 1 & 0\\ 1 & 3 & -1\\ 0 & -1 & 2
+		\end{bmatrix}$, so if we make $\langle x-y, x-y\rangle$ we got:
+		\begin{align*}
+			\begin{bmatrix}
+				2 & 3 & 3
+			\end{bmatrix} \begin{bmatrix}
+				2 & 1 & 0\\ 1 & 3 & -1\\ 0 & -1 & 2
+			\end{bmatrix} \begin{bmatrix}
+				2\\ 3\\ 3
+			\end{bmatrix} &= \begin{bmatrix}
+				2 & 3 & 3
+			\end{bmatrix} \begin{bmatrix}
+				7 \\ 8 \\ 3
+			\end{bmatrix}\\
+			&= 2 \cdot 7 + 3\cdot 8 + 3\cdot 3\\
+			&= 14 + 24 + 9\\
+			&= 47
+		\end{align*}
+		So we have:
+		\begin{align*}
+			d(x, y) &= \|x-y\|\\
+			&= \sqrt{\langle x-y, x-y\rangle}\\
+			&= \sqrt{\langle (2, 3, 3), (2, 3, 3) \rangle}\\
+			&= \sqrt{47}\\
+		\end{align*}
+	\end{enumerate}
+}
+
+\problem Compute the angle between:
+\begin{align*}
+	x &= (1, 2) & y &= (-1, -1)
+\end{align*}
+using the inner products:
+\begin{enumerate}
+	\item $\langle x, y \rangle = x^\top y$
+	\item $\langle x, y \rangle = x^\top By$ with $B = \begin{bmatrix}
+		2 & 1\\ 1 & 3
+	\end{bmatrix}$
+\end{enumerate}
+\solution{
+	\begin{enumerate}
+		\item With the usual product and the norm induced by that, we consider that:
+		\begin{align*}
+			\cos \omega &= \frac{|\langle x, y\rangle|}{\|x\| \|y\|}\\
+			&= \frac{|1 \cdot (-1) + 2 \cdot (-1)|}{\sqrt{1^2 + 2^2} \sqrt{(-1)^2 + (-1)^2}}\\
+			&= \frac{|-1 - 2|}{\sqrt{5} \sqrt{2}}\\
+			&= \frac{3}{\sqrt{10}}\\
+		\end{align*}
+		And so we get that $\omega = \arccos \frac{3}{\sqrt{10}} \approx 18 \deg$ 
+
+		\item It is convenient to compute the inner product with arbitrary $(x_1, x_2)$ and $(y_1, y_2)$:
+		\begin{align*}
+			\langle (x_1, x_2), (y_1, y_2)\rangle &= \begin{bmatrix}
+				x_1 & x_2
+			\end{bmatrix} \begin{bmatrix}
+				2 & 1\\ 1 & 3
+			\end{bmatrix} \begin{bmatrix}
+				y_1 \\ y_2
+			\end{bmatrix}\\
+			&= \begin{bmatrix}
+				x_1 & x_2
+			\end{bmatrix}\begin{bmatrix}
+				2y_1 + y_2\\
+				y_1 + 3y_2
+			\end{bmatrix}\\
+			&= 2x_1y_1 + x_1y_2 + y_1x_2 + 3x_2y_2
+		\end{align*}
+		Now, with that we are ready to compute the angle given by this inner product.
+		\begin{align*}
+			\cos \omega &= \frac{|\langle x, y\rangle|}{\|x\| \|y\|}\\
+			&= \frac{|2(1)(-1) + (1)(-1) + (2)(-1) + 3(2)(-1)|}{\sqrt{2(1)(1) + (1)(2) + (1)(2) + 3(2)(2)} \sqrt{(2)(-1)(-1) + (-1)(-1) + (-1)(-1) + (3)(-1)(-1)}}\\
+			&= \frac{|-2-1-2-6|}{\sqrt{2+2+2+12} \sqrt{2+1+1+3}}\\
+			&= \frac{|-11|}{\sqrt{18} \sqrt{7}}\\
+			&= \frac{|11|}{\sqrt{126}}\\
+			&= \frac{11}{\sqrt{126}}
+		\end{align*}
+		And so we end up that $\omega = \arccos \frac{11}{\sqrt{126}} \approx 11.5 \deg$.
+	\end{enumerate}
+}
+
+\problem Consider $\mathbb{R}^3$ with the inner product:
+\begin{align*}
+	\langle x, y \rangle &= x^\top \begin{bmatrix}
+		2 & 1 & 0\\ 1 & 2 & -1\\ 0 & -1 & 2
+	\end{bmatrix}y
+\end{align*}
+and let $e_1, e_2, e_3$ be the canonical basis of $\mathbb{R}^3$. 
+\begin{itemize}
+	\item Define the orthogonal projection $\pi_U(e_2)$ onto $U = span[e_1, e_3]$
+	\item Compute the distance $d(e_2, U)$
+	\item Draw the scenario.
+\end{itemize}
+\solution{
+	Since we want to project $e_2$ into the set $span[e_1, e_3]$ for the projction $\pi_U(e_2)$ there would be $\lambda_1, \lambda_2$ such that:
+	\begin{align*}
+		\pi_U(e_2) &= \lambda_1 \cdot e_1 + \lambda_2 \cdot e_3
+	\end{align*}
+	so we must have that:
+	\begin{align*}
+		\langle e_1, e_2 - \pi_U(e_2)\rangle &= 0\\
+		\langle e_3, e_2 - \pi_U(e_2)\rangle &= 0
+	\end{align*}
+	So let us first compute what this product must be:
+	\begin{align*}
+		\langle (x_1, x_2, x_3), (y_1, y_2, y_3)\rangle &= \begin{bmatrix}
+			x_1 & x_2 & x_3
+		\end{bmatrix}\begin{bmatrix}
+			2 & 1 & 0\\ 1 & 2 & -1\\ 0 & -1 & 2
+		\end{bmatrix}\begin{bmatrix}
+			y_1 \\ y_2 \\ y_3
+		\end{bmatrix}\\
+		&= \begin{bmatrix}
+			x_1 & x_2 & x_3
+		\end{bmatrix} \begin{bmatrix}
+			2y_1 + y_2\\ y_1 + 2y_2 - y_3\\ 2y_3 - y_2
+		\end{bmatrix}\\
+		&= 2x_1y_1 + x_1y_2 + y_1x_2 + 2x_2y_2 - x_2y_3 + 2x_3y_3 - x_3y_2
+	\end{align*}
+}
 \end{document}
