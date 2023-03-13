@@ -834,21 +834,208 @@ and let $e_1, e_2, e_3$ be the canonical basis of $\mathbb{R}^3$.
 		\langle e_1, e_2 - \pi_U(e_2)\rangle &= 0\\
 		\langle e_3, e_2 - \pi_U(e_2)\rangle &= 0
 	\end{align*}
-	So let us first compute what this product must be:
+	
+	Now, we end up with the system:
 	\begin{align*}
-		\langle (x_1, x_2, x_3), (y_1, y_2, y_3)\rangle &= \begin{bmatrix}
-			x_1 & x_2 & x_3
+		e_1^\top B(e_2-\pi_U(e_2)) &= 0
+		e_3^\top B(e_2-\pi_U(e_2)) &= 0
+	\end{align*}
+	And this can be showed as a matricial product like:
+	\begin{align*}
+		\begin{bmatrix}
+			e_1^\top \\ e_2^\top
+		\end{bmatrix} B(e_2 - \pi_U(e_2)) &= 0
+	\end{align*} 
+	And if we call $A = \begin{bmatrix}
+		e_1^\top \\ e_2^\top
+	\end{bmatrix}$ and knowing that $\pi_U$ shall be expressed as a linear combination of $P = [e_1, e_3]$ then it becomes:
+	\begin{align*}
+		AB(e_2 - \pi_U(e_2)) &= 0\\
+		ABe_2 - ABP\lambda &= 0\\
+		ABP\lambda &= ABe_2\\
+	\end{align*}
+	If we compute the product $ABP$ we got:
+	\begin{align*}
+		AB &= \begin{bmatrix}
+			1 & 0 & 0\\ 0 & 0 & 1
+		\end{bmatrix}\begin{bmatrix}
+			2 & 1 & 0\\ 1 & 2 & -1 \\ 0 & -1 & 2
+		\end{bmatrix}\\
+		&= \begin{bmatrix}
+			2 & 1 & 0\\
+			0 & -1 & 2
+		\end{bmatrix}
+	\end{align*}
+	And if we multiply by $P$ then:
+	\begin{align*}
+		ABP &= \begin{bmatrix}
+			2 & 1 & 0\\
+			0 & -1 & 2
+		\end{bmatrix} \begin{bmatrix}
+			1 & 0\\ 0 & 0\\ 0 & 1
+		\end{bmatrix}\\
+		&= \begin{bmatrix}
+			2 & 0\\
+			0 & 2
+		\end{bmatrix}\\
+		&= 2I
+	\end{align*}
+	And so we get:
+	\begin{align*}
+		ABP\lambda &= ABe_2\\
+		2I\lambda &= ABe_2\\
+		2\lambda &= ABe_2
+	\end{align*}
+	And so we only need to compute $ABe_2$:
+	\begin{align*}
+		ABe_2 &= \begin{bmatrix}
+			2 & 1 & 0\\
+			0 & -1 & 2
+		\end{bmatrix} \begin{bmatrix}
+			0 \\ 1 \\ 0
+		\end{bmatrix}\\
+		&= \begin{bmatrix}
+			1 \\ -1
+		\end{bmatrix}
+	\end{align*}
+	And if we divide by $2$ we get:
+	\begin{align*}
+		\lambda &= \begin{bmatrix}
+			\frac{1}{2} \\ \frac{-1}{2}
+		\end{bmatrix}
+	\end{align*}
+
+	And therefore we get that:
+	\begin{align*}
+		\pi_U(e_2) &= e_1 \cdot \lambda_1 + e_3 \cdot \lambda_3\\
+		&= \begin{bmatrix}
+			\frac{1}{2} \\ 0 \\ 0
+		\end{bmatrix} + \begin{bmatrix}
+			0 \\ 0 \\ -\frac{1}{2}
+		\end{bmatrix}\\
+		&= \begin{bmatrix}
+			\frac{1}{2} \\ 0\\ -\frac{1}{2}
+		\end{bmatrix}
+	\end{align*}
+
+	And that is the projection of $e_2$ into $U$.
+
+	Now, for compute the distance between $e_2$ and $U$ we compute what is $e_2 - \pi_U(e_2)$ and then we apply it to the norm induced by the inner product:
+	\begin{align*}
+		e_2 - \pi_U(e_2) &= \begin{bmatrix}
+			0 \\ 1 \\ 0
+		\end{bmatrix} - \begin{bmatrix}
+			\frac{1}{2} \\ 0\\ -\frac{1}{2}
+		\end{bmatrix}\\
+		&= \begin{bmatrix}
+			-\frac{1}{2} \\ 1 \\ \frac{1}{2}
+		\end{bmatrix}
+	\end{align*}
+
+	And now we apply to itself the inner product:
+	\begin{align*}
+		\langle e_2 - \pi_U(e_2), e_2 - \pi_U(e_2)\rangle &= \begin{bmatrix}
+			-\frac{1}{2} & 1 & \frac{1}{2}
 		\end{bmatrix}\begin{bmatrix}
 			2 & 1 & 0\\ 1 & 2 & -1\\ 0 & -1 & 2
 		\end{bmatrix}\begin{bmatrix}
-			y_1 \\ y_2 \\ y_3
+			-\frac{1}{2} \\ 1 \\ \frac{1}{2}
 		\end{bmatrix}\\
 		&= \begin{bmatrix}
-			x_1 & x_2 & x_3
+			-\frac{1}{2} & 1 & \frac{1}{2}
 		\end{bmatrix} \begin{bmatrix}
-			2y_1 + y_2\\ y_1 + 2y_2 - y_3\\ 2y_3 - y_2
+			0 \\ 1\\ 0
 		\end{bmatrix}\\
-		&= 2x_1y_1 + x_1y_2 + y_1x_2 + 2x_2y_2 - x_2y_3 + 2x_3y_3 - x_3y_2
+		&= 1
 	\end{align*}
+	And so we see that the distance between that two vectors is $1$. 
+
+	%TODO: Put the draw of the situtation
 }
+
+\problem Let $V$ be a vector space and $\pi$ an endomorphism of $V$:
+\begin{itemize}
+	\item Prove that $\pi$ is a projection if and only if $Id_V - \pi$ is a projection
+	\item Assume that $\pi$ is a projection. Calculate $Im(Id_V - \pi)$ and $\ker(id_V - \pi)$ as a function of $Im(\pi)$ and $\ker(\pi)$.
+\end{itemize}
+
+\solution{
+	First, let's prove the equivalence:
+	\begin{itemize}
+		\item[$\Rightarrow)$] Suppose that $\pi$ is a projection. Then $\pi \circ \pi = \pi$. And if we compute $Id_V - \pi$ composed with itself we get:
+		\begin{align*}
+			(Id_V - \pi)((Id_v - \pi)(x)) &= (Id_V - \pi)(Id_v(x) - \pi(x))\\
+			&= (Id_V - \pi)(x - \pi(x))\\
+			&= Id_V(x-\pi(x)) - \pi(x - \pi(x))\\
+			&= x - \pi(x) + \pi(\pi(x) - x)\\
+			&= x - \pi(x) + \pi(\pi(x)) - \pi(x)\\
+			&= x - \pi(x) + \pi(x) - \pi(x)\\
+			&= x - \pi(x)
+		\end{align*}
+		And so we get that $(Id_V - \pi) \circ (Id_V - \pi) = Id_V - \pi$ and so it is a projection.
+
+		\item[$\Leftarrow)$] Suppose that $Id_V - \pi$ is a projection. Then $(Id_V - \pi) \circ (Id_V - \pi) = Id_V - \pi$. If we compute $\pi \circ \pi$ we get:
+		\begin{align*}
+			\pi(\pi(x)) &= \pi(-(Id-\pi - Id)(x))\\
+			&= \pi(Id(x)-(Id-\pi)(x))\\
+			&= \pi(x - (Id-\pi(x)))\\
+			&= -((Id-\pi) - Id)(x - (Id-\pi)(x))\\
+			&= -((Id-\pi)(x-(Id-\pi)(x))) - Id(x-(Id-\pi)(x))\\
+			&= x - (Id-\pi)(x) - (Id-\pi)(x-(Id-\pi)(x))\\
+			&= x - (Id-\pi)(x) - (Id-\pi)(x) + (Id - \pi)((Id-\pi)(x))\\
+			&= x - (Id-\pi)(x) - (Id-\pi)(x) + (Id-\pi)(x)\\
+			&= x - (Id-\pi)(x)\\
+			&= x - Id(x) + \pi(x)\\
+			&= x - x + \pi(x) = \pi(x) 
+		\end{align*}
+		And since $\pi \circ \pi = \pi$, then $\pi$ is a projection.
+
+	Now, if we assume that $\pi$ is a projection, then we are going to give a description for each one.
+	\begin{itemize}
+		\item $y \in Im(Id_V - \pi)$ if and only if $y \in \ker(\pi)$. Let's prove this. If $y \in Im(Id_V - \pi)$ then there is $x \in V$ such that $(Id_V - \pi)(x) = y$. And so:
+		\begin{align*}
+			(Id_V - \pi)(x) &= y\\
+			Id_V(x) - \pi(x) &= y\\
+			\pi(x) + y - x &=0\\
+			\pi(\pi(x) + y - x) &= \pi(0)\\
+			\pi(\pi(x)) + \pi(y) - \pi(x) &= 0\\
+			\pi(x) + \pi(y) - \pi(x) &= 0\\
+			\pi(y) &= 0
+		\end{align*} 
+		And so we get that $y \in \ker(\pi)$. If $y \in \ker(\pi)$ then $\pi(y) = 0$. If we add and substract $y$ we get:
+		\begin{align*}
+			\pi(y) &= 0\\
+			\pi(y) + y - y &= 0\\
+			\pi(y) - y &= -y\\
+			y-\pi(y) &= y\\
+			Id_V(y) - \pi(y) &= y\\
+			(Id_V - \pi)(y) &= y
+		\end{align*}
+		And by definition $y \in Im(Id_V - \pi)$. So $Im(Id_V - \pi) = \ker(\pi)$.
+
+		\item In a similar way, we get that $x \in \ker(Id_V - \pi)$ if and only if $x \in Im(\pi)$. Suppose that $x \in \ker(Id_V - pi)$, that means that:
+		\begin{align*}
+			(Id_V-\pi)(x) &= 0\\
+			Id_V(x) - \pi(x) &= 0\\
+			x - \pi(x) &= 0\\
+			\pi(x) &= x
+		\end{align*} 
+		And so we get that $x \in \Im(\pi)$. If $x \in Im(\pi)$ we know that there is $y \in V$ such that $\pi(y) = x$. If we apply $\pi$ again we get that $\pi(y) = \pi(x)$. Now, we get:
+		\begin{align*}
+			(Id_V-\pi)(x) &= Id_V(x) - \pi(x)\\
+			&= x - \pi(x)\\
+			&= x - \pi(y)\\
+			&= x - x\\
+			&= 0
+		\end{align*}
+		So $x \in \ker(\pi)$. Therefore, $\ker(Id_V - \pi) = Im(\pi)$.
+	\end{itemize}
+	\end{itemize}
+}
+
+\problem Let $n \in \mathbb{N}$ and let $x_1, \dots, x_n > 0$ be $n$ positive real numbers so that $x_1 + \dots + x_n = 1$. Use the Cauchy-Schwarz inequality and show that:
+\begin{enumerate}
+	\item $\sum_{i=1}^n x_i^2 \ge \frac{1}{n}$
+	\item $\sum_{i=1}^n \frac{1}{x_1} \ge n^2$
+\end{enumerate}
 \end{document}
