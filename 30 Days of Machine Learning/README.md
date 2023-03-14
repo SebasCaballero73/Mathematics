@@ -16,8 +16,8 @@ What is a good adventure with no challenges? And since machine learning can be a
  | ------ | ----------------------------------------------------------------------------------------------------------- | --------- | ----------------- | --- |
  | Day 1  | Systems of linear equations, Matrices, and vector spaces                                                    | Yes        | Linear Algebra    |
  | Day 2  | Rank of matrices, Linear maps, and affine spaces                                                            | Yes        | Linear Algebra    |
- | Day 3  | Norms, Inner products, Lenghts, Angles, and Orthogonality                                                   | No        | Analytic Geometry |
- | Day 4  | Orthonormal basis, Orthogonal Complement projections, and inner products of functions                       | No        | Analytic Geometry |
+ | Day 3  | Norms, Inner products, Lenghts, Angles, and Orthogonality                                                   | Yes        | Analytic Geometry |
+ | Day 4  | Orthonormal basis, Orthogonal Complement projections, and inner products of functions                       | Yes       | Analytic Geometry |
  | Day 5  | Determinants, Traces, Eigenvalues/Eigenvectors, Cholesky descompontition                                    | No        | Linear Algebra    |
  | Day 6  | Eigendecomposition, diagonalization, Singer value decomposition, Matrix approximation, and Matrix phylogeny | No        | Linear Algebra    |
  | Day 7  | Differentiation of real functions and gradients                                                             | No        | Calculus          |     |
