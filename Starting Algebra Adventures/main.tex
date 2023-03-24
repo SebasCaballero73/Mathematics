@@ -457,5 +457,411 @@ Let $W$ be a subspace of the finite-dimensional vector space $V$. Show that ther
 	\end{align*}
 }
 
+\problem Show that the set $V(\lambda)$ is a subspace of $V$ for each $\lambda \in K$.\\
 
+\solution{
+	Suppose that for a fixed $\lambda \in K$ and an endomorphism $\phi: V \to V$, $v, w \in V(\lambda)$. Then $\phi(v) = \lambda v$ and $\phi(w) = \lambda w$. Suppose also that $k \in K$, so we want to show that $cv + w \in V(\lambda)$. So, we need to prove that this vector under $\phi$ is the same vector scaled in $\lambda$:
+	\begin{align*}
+		\phi(cv+w) &= c\phi(v) + \phi(w)\\
+		&= c\lambda v + \lambda w\\
+		&= \lambda(cv+ w)
+	\end{align*}
+	And so we get that $\phi(cv+w) = \lambda(cv + w)$ and so $V(\lambda)$ is a subspace of $V$.
+}
+
+\problem Given $\phi \in End(V)$, show that $0$ is an eigenvalue for $\phi$ if and only if $\ker \phi \neq \{0\}$.
+
+\solution{
+	Suppose that $\ker \phi \neq \{0\}$, then there is some $v \in V$ such that $v \neq 0$ and $\phi(v) = 0$. Then, $\phi(v) = 0 v$ and so $v$ is an eigenvector with eigenvalue $0$. Now, if $0$ is an eigenvalue for $\phi$ then there is $v \in V$ no null such that $\phi(v) = 0 v$ but this is $\phi(v) = 0$ and so $\ker \phi \neq \{0\}$.
+}
+
+\problem Suppose that $\lambda$ is an eigenvalue for an isomorphism $\phi \in GL(V)$. Show that $\lambda^{-1}$ is an eigenvalue for $\phi^{-1}$.
+
+\solution{
+	If $\lambda$ is an eigenvalue for $\phi$, then there is a no null vector $v$ such that $\phi(v) = \lambda v$. Now, if we compute:
+	\begin{align*}
+		\phi^{-1}(\phi(v)) &= v\\
+		&= (\lambda^{-1} \lambda) v\\
+		&= \lambda^{-1} (\lambda v)\\
+		&= \lambda^{-1} \phi(v)
+	\end{align*}
+	So we conclude that $\lambda^{-1}$ is an eigenvalue for $\phi^{-1}$ with eigenvector $\phi(v)$.
+}
+
+\problem Let $\{e_1, e_2, e_3\}$ be the standard basis for $\mathbb{R}^3$. Find the eigenvalues with their correspondent eigenvectors for $\phi: \mathbb{R}^3 \to \mathbb{R}^3$ defined by $\phi(e_1) = e_1$, $\phi(e_2) = e_1 + e_2$ and $\phi(e_3) = e_3$. What is the geometric multiplicity of each eigenvalue?
+
+\solution{
+	So, we first need to characterize the transformation for any vector in $\mathbb{R}^3$. Let $\alpha = (a_1, a_2, a_3)$ be a vector in $\mathbb{R}^3$ then:
+	\begin{align*}
+		\phi(\alpha) &= \phi(a_1e_1 + a_2e_2 + a_3e_3)\\
+		&= a_1\phi(e_1) + a_2\phi(e_2) + a_3\phi(e_3)\\
+		&= a_1e_1 + a_2(e_1 + e_2) + a_3e_3\\
+		&= (a_1 + a_2)e_1 + a_2e_2 + a_3e_3
+	\end{align*}
+	And we want to see whenever it is equal to the same vector scaled by $\alpha$:
+	\begin{align*}
+		(a_1 + a_2)e_1 + a_2e_2 + a_3e_3 &= \lambda(a_1e_1 + a_2e_2 + a_3e_3)\\
+		(a_1 + a_2)e_1 + a_2e_2 + a_3e_3 &= \lambda a_1e_1 + \lambda a_2e_2 + \lambda a_3e_3\\
+	\end{align*}
+	From which we get:
+	\begin{align*}
+		a_1 + a_2 &= \lambda a_1\\
+		a_2 &= \lambda a_2\\
+		a_3 &= \lambda a_3
+	\end{align*}
+	And so we get:
+	\begin{align*}
+		a_1(1 - \lambda) + a_2 &= 0\\
+		a_2(1 - \lambda) &= 0\\
+		a_3(1 - \lambda) &= 0
+	\end{align*}
+	In any case no matter the values for $\alpha$, we get that $\lambda = 1$, and the eigenvectors associated with $\lambda$ are $e_1$ and $e_3$. Therefore, the geometric multiplicity of $V(1)$ is $2$.
+}	
+
+
+\section{Groups, Rings and Polynomials}
+
+\problem If $(G, \circledcirc)$ and $(H, \circledast)$ are groups, and $\phi: G \to H$ a group homomorphism, prove that $\Im(\phi)$ is a subgroup of $H$. Is it normal?
+
+\solution{
+	Suppose that $h_1, h_2 \in Im(\phi)$, then there are $g_1, g_2 \in G$ such that $\phi(g_1) = h_1$ and $\phi(g_2) = h_2$. Now, we want to prove that $h_1 \circledast h_2 \in Im(\phi)$, so if we compute:
+	\begin{align*}
+		\phi(g_1 \circledcirc g_2) &= \phi(g_1) \circledast \phi(g_2)\\
+		&= h_1 \circledast h_2
+	\end{align*}
+	So we conclude that $Im(\phi)$ is closed under $\circledast$. If we have $h \in Im(\phi)$ then there is $g \in G$ such that $\phi(g)$. If we compute the image for the inverse of $g$ as follows, we get:
+	\begin{align*}
+		e_H &= h \circledast h^{-1}\\
+		\phi(e_G) &= \phi(g) \circledast h^{-1}\\
+		\phi(g^{-1}) \circledast \phi(e_G) &= \phi(g^{-1}) \circledast \phi(g) \circledast h^{-1}\\
+		\phi(g^{-1} \circledcirc e_G) &= \phi(g^{-1} \circledcirc g) \circledast h^{-1}\\
+		\phi(g^{-1}) &= \phi(e_G) \circledast h^{-1}\\
+		\phi(g^{-1}) &= e_H \circledast h^{-1}\\
+		\phi(g^{-1}) &= h^{-1}\\
+	\end{align*}
+	And so we conclude that the $h^{-1} \in Im(\phi)$ so $Im(\phi)$ is a subgroup of $H$. If $H$ is commutative then $Im(\phi)$ is a normal group.
+}
+
+\problem Let $G$ be a group and $X$ a nonempty set. Then $G$ acts from the left on $X$ if there is a function
+\begin{align*}
+	G \times X \to X &, (g, x) \mapsto g \cdot x
+\end{align*}
+such that the following hold:
+\begin{itemize}
+	\item $e \cdot x = x$ for all $x \in X$
+	\item $g \cdot (h \cdot x) = (gh) \cdot x$ for all $g, h \in G$ and $x \in X$
+\end{itemize}
+Show that $x \mapsto g\cdot x$ is a bijection on $X$ with inverse $x \mapsto g^{-1} \cdot x$. Also, for $x \in X$, $G \cdot x$ is called the orbit of $x$ under the action of $G$. Show that the relation \textit{$y$ is in the orbit of $x$} is an equivalence relation $X$.
+
+\solution{
+	First, we are going to prove that this is a bijection.
+	\begin{itemize}
+		\item Suppose that $x, y \in X$ are elements that have the same image. Then $g \cdot x = g \cdot y$ if we multiply by the inverse element of $g$ under $G$ we get that $x = y$. 
+		\item Take $x \in X$, then since $g^{-1} \cdot x \in X$, we can apply the function to it and we get $g \cdot (g^{-1} \cdot x) = (g \cdot g^{-1}) \cdot x = e \cdot x = x$. 
+	\end{itemize}
+	So that function is a bijection. If we compose it to the right and to the left with the other one it is obvious that we get the identity map over $X$ so they are inverses.\\
+
+	And now we are going to prove that it is an equivalence relation:
+	\begin{itemize}
+		\item \textbf{Reflexivity:} Since $e \cdot x = x$ then $x \in G \cdot x$
+		\item \textbf{Symmetry:} Suppose $y \in G \cdot x$, then there is $g \in G$ such that $g \cdot x = y$. If we manipulate it as follows:
+		\begin{align*}
+			g \cdot x &= y\\
+			g^{-1} \cdot (g \cdot x) &= g^{-1} \cdot y\\
+			(g^{-1} \cdot g) \cdot &= g^{-1} \cdot y\\
+			e \cdot x &= g^{-1} \cdot y\\
+			x &= g^{-1} \cdot y
+		\end{align*}
+		And since $g^{-1} \in G$ then $x \in G \cdot y$.
+		\item \textbf{Transitivity:} Suppose that $y \in G \cdot x$ and $z \in G \cdot y$, so there are $g_1, g_2 \in G$ such that $y = g_1 \cdot x$ and $z = g_2 \cdot y$. And so if we replace the value of $y$ then:
+		\begin{align*}
+			z &= g_2 \cdot y\\
+			&= g_2 \cdot (g_1 \cdot x)\\
+			&= (g_2 \cdot g_1) \cdot x
+		\end{align*}
+		And so $z \in G \cdot x$.
+	\end{itemize}
+}
+
+\problem Show that if $H$ is a subgroup of $G$, then $(h, g) \mapsto h \cdot g$ and $(h, g) \mapsto hgh^{-1}$ define actions of $H$ on $G$.
+
+\solution{
+	For the first function:
+	\begin{itemize}
+		\item Since $H$ is a subgroup of $G$, then $e \in H$ is also the identity of $G$ and so $(e, g) \mapsto e \cdot g = g$.
+		\item Thanks to the fact that $H$ is a subgroup of $G$, $(h_2, (h_1, g)) \mapsto h_2 \cdot (h_1, g) = h_2 \cdot (h_1 \cdot g) = (h_2 \cdot h_1) \cdot g$.
+	\end{itemize}
+
+	And so the first function define an action over $G$. And for the second function:
+	\begin{itemize}
+		\item Since $H$ is a subgroup of $G$, $(e, g) \mapsto e\cdot x\cdot e^{-1} = e \cdot x \cdot e = x$. 
+		\item Thanks to the fact that $H$ is a subgroup of $G$, $(h_2, (h_1, g)) \mapsto h_2(h_1, g)h^{-1}_2 = h_2(h_1 \cdot g \cdot h^{-1}_1)h^{-1}_2$ and by properties of the group that is equal $(h_2h_1) \cdot g \cdot (h^{-1}_1h^{-1}_2) = (h_2h_1) \cdot g \cdot (h_2h_1)^{-1}$.  
+	\end{itemize}
+}
+
+\problem Show that:
+\begin{align*}
+	\mathfrak{S}_m \times \mathbb{N}^m \to \mathbb{N}^m & &(\sigma, \alpha) \mapsto \sigma \cdot \alpha := (\alpha_{\sigma(1)}, \dots, \alpha_{\sigma(m)})
+\end{align*}
+defines an action of $\mathfrak{S}_m$ on $\mathbb{N}^m$.
+
+\solution{
+	Proving the two properties:
+	\begin{itemize}
+		\item $Id_m \cdot \alpha = (\alpha_{Id_m(1)}, \dots, \alpha_{Id_m(m)}) = (\alpha_1, \dots, \alpha_m)$ and so we conclude that $Id_m \cdot \alpha = \alpha$
+		\item For prove the associativity of the operation we get:
+		\begin{align*}
+			\sigma \cdot (\pi \cdot \alpha) &= \sigma \cdot (\alpha_{\pi(1)}, \dots, \alpha_{\pi(m)})\\
+			&= (\alpha_{\pi(\sigma(1))}, \dots, \alpha_{\pi(\sigma(m))})\\
+			&= (\pi \cdot \sigma) \cdot \alpha
+		\end{align*}
+	\end{itemize}
+	So $\mathfrak{S}_m$ acts over $\mathbb{N}^m$.
+}
+
+\problem Let $G$ and $H$ be groups, and let:
+\begin{align*}
+	p: & G \times H \to G, & (g, h) &\mapsto g
+\end{align*}
+be the projection onto the first factor. Show that $p$ is a surjective homomorphism. Set $H' := \ker(p)$. Show that $(G \times H)/H'$ and $G$ are isomorphic group.
+
+\solution{
+	First, for any $g \in G$, the ordered pair $(g, e_H)$ will project to $g$ so $p$ is surjective. We are going to prove that it is also an homomorphism:
+	\begin{align*}
+		p(g_1 \circledcirc g_2, h_1 \circledast h_2) &= g_1 \circledcirc g_2\\
+		&= p(g_1, h_1) \circledcirc p(g_2, h_2)
+	\end{align*}
+	Now, note that the kernel $ker(p) = \{(g, h) \in G \times H | g = 0_G\}$ and so if we seek the relation over the kernel of the map we see that if $(x_1, x_2) \sim (y_1, y_2)$ then:
+	\begin{align*}
+		(x_1, x_2) \in (y_1, y_2) \circleddash H' &\Leftrightarrow (x_1, x_2) = (y_1, y_2) \circleddash (0, h)\\
+		& (x_1, x_2) = (y_1, y_2 \circledast h)
+	\end{align*}
+	and so we get that $x_1 = y_1$ and $x_2 = y_2 \circledast h$, so we can conclude that are elements that have the same image, that is $[(x, y)] = \{(g, h) \in G \times H | g = x\}$.
+
+	\begin{align*}
+		\phi: &(G \times H)/H' \to G & [(x, y)] \mapsto x
+	\end{align*}
+
+	So, we need to prove that it is a bijective homomorphism:
+	\begin{itemize}
+		\item \textbf{Injectivity:} Suppose that $[(x, y)]$ and $[(z, w)]$ elements from $(G \times H)/H'$ have the same image. So it means that $x = z$ and therefore $[(x, y)] = [(z, w)]$.
+		\item \textbf{Surjective:} For any $g \in G$, you get that $\phi([(g, e_H)]) = g$ so $\phi$ is surjective
+		\item \textbf{Homomorphism:} For $[(x, y)]$ and $[(z, w)]$ elements from $(G \times H)/H'$ compute the image of its product:
+		\begin{align*}
+			\phi([(x, y)] \circleddash [(z, w)]) &= \phi([(x \circledcirc z, y \circledast z)])\\
+			&= x \circledcirc z\\
+			&= \phi([(x, y)]) \circledcirc \phi([(z, w)])
+		\end{align*}
+	\end{itemize}
+
+	So we conclude that $(G \times H)/H'$ and $G$ are isomorphic.
+}
+
+\problem Let $G$ be a set with an operation $\circledcirc$ and identity element. For $g \in G$, define the function $Lg: G \to G$, $h \mapsto g \circledcirc h$ called the \textbf{left transition} by $g$. Define then the set:
+\begin{align*}
+	L &:= \{Lg \in Func(G, G) | g \in G\}
+\end{align*}
+Prove that $(G, \circledcirc)$ is a group if and only if $L \subseteq \mathfrak{S}_G$.
+
+\solution{
+	\begin{itemize}
+		% TODO: Prove associativity
+		\item[$\Rightarrow)$] If $(G, \circledcirc)$ is a group, then we need to prove that for any $g$, $Lg$ is a bijection. First, the injectivity since if $Lg(h) = Lg(k)$ then $g \circledcirc h = g \circledcirc k$ and therefore $h = k$. Now, for any element $h$ in the group, $Lg(g^{-1} \circledcirc h) = g \circledcirc (g^{-1} \circledcirc h) = (g \circledcirc g^{-1}) \circledcirc h = e \circledcirc h = h$, and so $Lg$ is a bijection and therefore $L \subseteq \mathfrak{S}_G$.\\
+
+		\item[$\Leftarrow)$] If $L \subseteq \mathfrak{S}_G$ then for any $g \in G$, the function $Lg$ is bijective and so it has an inverse, call it $Rg$. That function is also a bijection and so it is surjective. So, for any $g$, the there is $g \circledcirc h \in G$ such that $Rg(g \circledcirc h) = e$. But this means that $Lg(h) = g \circledcirc h = e$ and so we conclude that each element has an inverse element. 
+	\end{itemize}
+}
+
+\section{Rings and Fields}
+
+\problem Let $a, b$ be commuting elements of a ring with unity and $n \in \mathbb{N}$, prove that:
+\begin{enumerate}
+	\item $a^{n+1} - b^{n+1} = (a-b)\sum_{j = 0}^{n} a^j b^{n-j}$
+	\item $a^{n+1} - 1 = (a-1)\sum_{j = 0}^{n} a^j$
+\end{enumerate}
+
+\solution{
+	We prove the first one by induction. If $n = 0$, then we would have:
+	\begin{align*}
+		(a-b) \sum_{j = 0}^{0} a^j b^{n-j} &= (a-b)[a^0 b^0]\\
+		&= (a - b) 
+	\end{align*}
+	which shows that the claim is true. Suppose it is true for $n$, and so we have:
+	\begin{align*}
+		(a-b)\sum_{j = 0}^{n + 1} a^j b^{n + 1 -j} &= (a-b)\left[\sum_{j = 0}^{n}a^j b^{n+1-j} + a^{n+1}\right]\\
+		&= (a-b)\sum_{j = 0}^{n}a^j b^{n+1-j} + (a-b)a^{n+1}\\
+		&= b(a-b)\sum_{j = 0}^{n}a^j b^{n-j} + (a-b)a^{n+1}\\
+		&= b(a^{n+1} - b^{n+1}) + a^{n+2} - a^{n+1}b\\
+		&= a^{n+1}b - b^{n+2} + a^{n+2} - a^{n+1}b\\
+		&= a^{n+2} - b^{n+2}
+	\end{align*}
+
+	So the claim is true for all $n \in \mathbb{N}$. The second identity is a special case of the first one when $b = 1$.
+}
+
+\problem For a ring $R$ with unity, show that $(1-X)\sum_k X^k = (\sum_k X^k)(1 - X) = 1$ in $R\|X\|$
+
+\solution{
+	For that, let's define:
+	\begin{align*}
+		q_n = (1-X) &:= \begin{cases}
+			1 & n = 0\\
+			-1 & n = 1\\
+			0 & n \ge 2
+		\end{cases}
+	\end{align*}
+	And also notice that:
+	\begin{align*}
+		p := \sum_k X^k &= (1_R)_{n \in \mathbb{N}}
+	\end{align*}
+
+	So if we compute the product $pq$ we have:
+	\begin{itemize}
+		\item For $n = 0$ that is $(pq)_n = p_0q_0 = 1$
+		\item For $n = 1$ that is $(pq)_n = p_0q_1 + p_1q_0 = 1 \cdot 1 - 1 \cdot 1 = 0$
+		\item For $n \ge 2$ that is $(pq)_n = p_0q_n + p_1q_{n-1} + \dots + p_kq_{n-k} + \dots + p_nq_0  = 1 - 1 + \dots + 0 + \dots + 0 = 0$
+	\end{itemize}
+	So we characterize this polynomial as:
+	\begin{align*}
+		(pq)_n &:= \begin{cases}
+			1 & n = 0\\
+			0 & n \ge 1
+		\end{cases}
+	\end{align*}
+	Which means that $pq = X^0 = 1$. The same argument is applied to show that this result commutes.
+}
+
+\problem Show that a finite field cannot be ordered.
+
+\solution{
+	Suppose that $(K, \le)$ is a finite ordered field. Now, define the function $f: \mathbb{N} \to K^+$ recursively as:
+	\begin{align*}
+		f(0) &= 0\\
+		f(n^+) &= f(n) + 1
+	\end{align*}
+	Now, we can prove that this function is bijective. If $n, m \in \mathbb{N}$ are such that $f(n) = f(m)$ then:
+	\begin{itemize}
+		\item If $f(n) = f(m) = 0$ then we are done since $f(n^+) > 0$ for all $n \in \mathbb{N}$ so $n = m = 0$.
+		\item Suppose that in general if $f(n) = f(m)$ then $n = m$. Now, if $f(n^+) = f(m)$ we must express $m$ as $x^+$ for $x \in \mathbb{N}$ and so:
+		\begin{align*}
+			f(n^+) &= f(x^+)\\
+			f(n) + 1 &= f(x) + 1\\
+			f(n) &= f(x)
+		\end{align*}
+		And so by induction hypothesis, $n = x$ and so $n^+ = x^+ = m$ and therefore this statement is true in general.
+	\end{itemize}
+	But then we would have $\mathbb{N} \preccurlyeq K^+ \preccurlyeq K$ and so we would have that $K$ is infinite which is a contradiction. Therefore, no finite field can be ordered.
+}
+
+\problem Show that a polynomial ring in one indeterminate over a field has no zero divisors.
+
+\solution{
+	Suppose that $p, q$ are polynomial over $K[X]$ with degree $n$ and $m$ respectively. Now, if we suppose that both Polynomials are distinct from $0$, then we have:
+	\begin{align*}
+		(pq)_{n+m} &= \sum_{k = 0}^{n+m} p_kq_{j-k}\\
+		&= p_0q_{n+m} + p_1q_{n+m-1} + \dots + p_nq_m + \dots + p_{n+m}q_0
+	\end{align*}
+	Now, since $K$ has no zero divisors, $p_nq_m \neq 0$ and for the terms we do the next analysis:
+	\begin{quote}
+		The possible nonzero terms of $p$ are $p_0, p_1, \dots, p_n$ and all that is greater in its subindex is $0$. Now, the possible nonzero terms of $q$ are $q_0, q_1, \dots, q_m$ and all that is greater in its subindex is $0$. If $k < n$ then $p_k$ is possibly nonzero, but $m < n+m - k$ so $q_{n+m-k} = 0$ and that term is just $0$. And now if $k < m$ then $q_m$ is defined but then $n < n + m - k$ and therefore $p_{n + m - k}$ is $0$. We conclude that the only nonzero term is $p_nq_m$.
+	\end{quote}
+
+	And so since $(pq)_{m + n} \neq 0$ then $pq \neq 0$ and also this shows how $\deg(pq) = \deg(p) + \deg(q)$.
+}
+
+\problem Let $K$ be an ordered field and $a, b, c, d \in K$.
+\begin{enumerate}
+	\item Show that, if $b > 0$ and $d > 0$ and $\frac{a}{b} < \frac{b}{d}$ then $\frac{a}{b} < \frac{a+c}{b+d} < \frac{c}{d}$
+	\item Show that if $a, b \in K^\times$ then $\left|\frac{a}{b} + \frac{b}{a}\right| \ge 2$
+\end{enumerate}
+
+\solution{
+	\begin{enumerate}
+		\item For one side, since $\frac{a}{b} < \frac{c}{d}$ we have:
+		\begin{align*}
+			ad &< bc\\
+			ad + ab &< ab + bc\\
+			a(b + d) &< b(a + c)
+		\end{align*}
+		And since $b > 0$ and $b + d > 0$ then we have:
+		\begin{align*}
+			\frac{a}{b} < \frac{a+c}{b+d}
+		\end{align*}
+		In a similar way one proves the other inequality.
+
+		\item Notice that we can decompose the left side as:
+		\begin{align*}
+			\left|\frac{a}{b} + \frac{b}{a}\right| &= \left|\frac{a^2+b^2}{ab}\right|\\
+			&= \frac{a^2+b^2}{|ab|}\\
+			&= \frac{a^2}{|ab|} + \frac{b^2}{|ab|}
+		\end{align*}
+		We will have three possible cases.
+		\begin{itemize}
+			\item If $\frac{a^2}{|ab|} \ge 1$ and $\frac{b^2}{|ab|} \ge 1$ then it is obviously true.
+			\item If $\frac{a^2}{|ab|} \ge 1$ and $1 \ge \frac{b^2}{|ab|} \ge 0$ then $1 - \frac{b^2}{|ab|} \le 0$ and $\frac{a^2}{|ab|} - 1 \ge 0$, so we conclude that $\frac{a^2}{|ab|} - 1 \ge 1 - \frac{b^2}{|ab|}$ and therefore $\frac{a^2}{|ab|} + \frac{b^2}{|ab|} \ge 2$.
+			\item If $1 \ge \frac{a^2}{|ab|} \ge 0$ and $1 \ge \frac{b^2}{|ab|} \ge 0$ then we would have that:
+			\begin{align*}
+				\frac{1}{\frac{a^2}{|ab|}} &\ge 1 & \frac{1}{\frac{b^2}{|ab|}} & \ge 0\\
+				\frac{|ab|}{a^2} &\ge 1 & \frac{|ab|}{b^2} & \ge 1
+			\end{align*}
+			And so we get that:
+			\begin{align*}
+				|ab| \left(\frac{1}{a^2} + \frac{1}{b^2}\right) &= |ab| \left(\frac{b^2 + a^2}{a^2b^2}\right)\\
+				&= \frac{a^2}{|ab|} + \frac{b^2}{|ab|} \ge 2
+			\end{align*}
+		\end{itemize}
+	\end{enumerate}
+}
+
+\problem Let $R$ be an ordered ring and $a, b \in R$ such that $a \ge 0$ and $b \ge 0$. Suppose that there is $n \in \mathbb{N}^\times$ such that $a^n = b^n$. Show that $a = b$.
+
+\solution{
+	The claim is obviously true when $a = 0$ or $b = 0$. Suppose that $a \neq 0$, $b \neq 0$ and $a^{n} = b^{n}$ for $n \in \mathbb{N}^\times$. That is:
+	\begin{align*}
+		a^n &= b^n\\
+		\frac{a^n}{b^n} &= 1\\
+		\left(\frac{a}{b}\right)^n &= 1\\
+	\end{align*}
+	If $n$ is odd then the only solution to this equation is $1$, so that $\frac{a}{b} = 1$ and therefore $a = b$. But if $n$ is even then $-1$ and $1$ are solutions of the equation. But if $\frac{a}{b} = -1$ it means that $a = -b$ but this is a contradiction with the fact that $a \ge 0$ and $b \ge 0$, so it is only possible that $\frac{a}{b} = 1$ and therefore $a = b$.
+}
+
+\problem Find $r, s \in K[X]$ with $\deg(r) < 3$ such that:
+\begin{align*}
+	X^5 - 3X^4 + 4X^3 &= s(X^3 - X^2 + X - 1) + r
+\end{align*}
+
+\solution{
+	We find them by construction. Set $s_1 = X^2$ and then set $p_1$ as:
+	\begin{align*}
+		p_1 &= p - qs_1\\
+		&= (X^5 - 3X^4 + 4X^3) - X^2(X^3 - X^2 + X - 1)\\
+		&= X^5 - 3X^4 + 4X^3 - X^5 + X^4 - X^3 + X^2\\
+		&= -2X^4 + 3X^3 + X^2
+	\end{align*}
+	Now, set $s_2 = -2X$ and set $p_2$ as follows:
+	\begin{align*}
+		p_2 &= p_1 - qs_2\\
+		&= (-2X^4 + 3X^3 + X^2) + 2X(X^3 - X^2 + X - 1)\\
+		&= -2X^4 + 3X^3 + X^2 + 2X^4 - 2X^3 + 2X^2 - 2X\\
+		&= X^3 + 3X^2 - 2X
+	\end{align*}
+	And at last, set $s_3 = 1$ and set $p_3$ like:
+	\begin{align*}
+		p_3 &= p_2 - qs_3\\
+		&= (X^3 + 3X^2 - 2X)- 1(X^3 - X^2 + X - 1)\\
+		&= X^3  + 3X^2 - 2X - X^3 + X^2 - X + 1\\
+		&= 4X^2 - 3X + 1
+	\end{align*}
+
+	Now, define $s:=s_1 + s_2 + s_3$ and set $r:= p_3$ then:
+	\begin{align*}
+		s(X^3 - X^2 + X - 1) + r &= (s_1 + s_2 + s_3)(X^3 - X^2 + X - 1) + r\\
+		&= (X^2 - 2X + 1)(X^3 - X^2 + X - 1) + 4X^2 - 3X + 1\\
+		&= (X^5 - X^4 + X^3 - X^2 - 2X^4 + 2X^3 - 2X^2 + 2X + X^3 - X^2 + X - 1) + 4X^2 - 3X + 1\\
+		&= X^5 - 3X^4 + 4X^3 - 4X^2 + 3X + 4X^2 - 3X - 1+ 1\\
+		&= X^5 - 3X^4 + 4X^3
+	\end{align*}
+}
+
+\problem Let $X$ be an $n$ element set. Show that the number of subsets of $X$ with odd number of elements is the same as the number of subsets of $X$ with even number of elements.
 \end{document}
